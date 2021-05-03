@@ -79,26 +79,26 @@ class OpenFromWebCreatedEventHandler(adsk.core.CommandCreatedEventHandler):
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
-class InsertingFromURLEventHandler(adsk.core.WebRequestEventHandler):
-    def __init__(self):
-        super().__init__()
+# class InsertingFromURLEventHandler(adsk.core.WebRequestEventHandler):
+#     def __init__(self):
+#         super().__init__()
 
-    def notify(self, args):
-        ui = None
-        try:
-            app = adsk.core.Application.get()
-            ui = app.userInterface
+#     def notify(self, args):
+#         ui = None
+#         try:
+#             app = adsk.core.Application.get()
+#             ui = app.userInterface
 
-            # temp.bearing20001(app.activeProduct)
+#             # temp.bearing20001(app.activeProduct)
 
-            # args.isCanceled = True
-            msg = "The InsertingFromURL event is fired.\n\n"
-            msg += formatMsg(args)
-            # ui.messageBox(msg)
+#             # args.isCanceled = True
+#             msg = "The InsertingFromURL event is fired.\n\n"
+#             msg += formatMsg(args)
+#             # ui.messageBox(msg)
 
-        except:
-            if ui:
-                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+#         except:
+#             if ui:
+#                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
 class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
@@ -123,49 +123,49 @@ class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
-class OpeningFromURLEventHandler(adsk.core.WebRequestEventHandler):
-    def __init__(self):
-        super().__init__()
+# class OpeningFromURLEventHandler(adsk.core.WebRequestEventHandler):
+#     def __init__(self):
+#         super().__init__()
 
-    def notify(self, args):
-        ui = None
-        try:
-            app = adsk.core.Application.get()
-            ui = app.userInterface
+#     def notify(self, args):
+#         ui = None
+#         try:
+#             app = adsk.core.Application.get()
+#             ui = app.userInterface
 
-            # temp.bearing20001(app.activeProduct)
+#             # temp.bearing20001(app.activeProduct)
 
-            # args.isCanceled = True
-            msg = "The OpeningFromURL event is fired.\n\n"
-            msg += formatMsg(args)
-            ui.messageBox(msg)
+#             # args.isCanceled = True
+#             msg = "The OpeningFromURL event is fired.\n\n"
+#             msg += formatMsg(args)
+#             ui.messageBox(msg)
 
-        except:
-            if ui:
-                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+#         except:
+#             if ui:
+#                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
-class OpenedFromURLEventHandler(adsk.core.WebRequestEventHandler):
-    def __init__(self):
-        super().__init__()
+# class OpenedFromURLEventHandler(adsk.core.WebRequestEventHandler):
+#     def __init__(self):
+#         super().__init__()
 
-    def notify(self, args):
-        ui = None
-        try:
-            app = adsk.core.Application.get()
-            ui = app.userInterface
-            design = app.activeProduct
-            rootComp = design.rootComponent
-            occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
-            parametres = occurence.component.parentDesign.allParameters
+#     def notify(self, args):
+#         ui = None
+#         try:
+#             app = adsk.core.Application.get()
+#             ui = app.userInterface
+#             design = app.activeProduct
+#             rootComp = design.rootComponent
+#             occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
+#             parametres = occurence.component.parentDesign.allParameters
 
-            msg = "The OpenedFromURL event is fired.\n\n"
-            msg += formatMsg(args)
-            ui.messageBox(msg)
+#             msg = "The OpenedFromURL event is fired.\n\n"
+#             msg += formatMsg(args)
+#             ui.messageBox(msg)
 
-        except:
-            if ui:
-                ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
+#         except:
+#             if ui:
+#                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))
 
 
 def run(context):
@@ -200,21 +200,21 @@ def run(context):
             toolbarControl.deleteMe()
         toolbarControl = toolbarControls.addCommand(commandDefinition)
 
-        onInsertingFromURL = InsertingFromURLEventHandler()
-        app.insertingFromURL.add(onInsertingFromURL)
-        handlers.append(onInsertingFromURL)
+        # onInsertingFromURL = InsertingFromURLEventHandler()
+        # app.insertingFromURL.add(onInsertingFromURL)
+        # handlers.append(onInsertingFromURL)
 
         onInsertedFromURL = InsertedFromURLEventHandler()
         app.insertedFromURL.add(onInsertedFromURL)
         handlers.append(onInsertedFromURL)
 
-        onOpeningFromURL = OpeningFromURLEventHandler()
-        app.openingFromURL.add(onOpeningFromURL)
-        handlers.append(onOpeningFromURL)
+        # onOpeningFromURL = OpeningFromURLEventHandler()
+        # app.openingFromURL.add(onOpeningFromURL)
+        # handlers.append(onOpeningFromURL)
 
-        onOpenedFromURL = OpenedFromURLEventHandler()
-        app.openedFromURL.add(onOpenedFromURL)
-        handlers.append(onOpenedFromURL)
+        # onOpenedFromURL = OpenedFromURLEventHandler()
+        # app.openedFromURL.add(onOpenedFromURL)
+        # handlers.append(onOpenedFromURL)
 
         ui.messageBox("The command is added to MODEL:ADD-INS panel.")
     except:

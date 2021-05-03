@@ -31,10 +31,9 @@ def run(occurence, Description):
 
     # Стандартные получалки
     app = adsk.core.Application.get()
-    ui  = app.userInterface
     design = app.activeProduct
     components = design.allComponents
-    rootComp = design.rootComponent
+    # rootComp = design.rootComponent
 
     # Получаем массив
     patternFeature = occurence.component.features.circularPatternFeatures[0]

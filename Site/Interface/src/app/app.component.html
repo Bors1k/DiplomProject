@@ -1,4 +1,8 @@
 <div class="container">
+    <div class="input-group flex-nowrap" style="margin-bottom: 10px;">
+        <input type="text" class="form-control" placeholder="Поиск" aria-label="" aria-describedby="addon-wrapping" #searchInput>
+    </div>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -10,12 +14,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let gost of gosts">
+            <tr *ngFor="let gost of gosts | searchFilter:searchInput.value;">
                 <th>{{gost.ID}}</th>
                 <td>{{gost.GOST}}</td>
                 <td>{{gost.TYPE}}</td>
                 <td>{{gost.MODEL_URL}}</td>
-                <td><button class="btn btn-success" (click)= "getTypeGOSTS(gost)">Выбрать</button></td>
+                <td><button class="btn btn-success" (click)="getTypeGOSTS(gost)">Выбрать</button></td>
             </tr>
         </tbody>
     </table>
@@ -42,7 +46,7 @@
                 <td>{{TypeGost.B}}</td>
                 <td>{{TypeGost.r}}</td>
                 <td>{{TypeGost.r1}}</td>
-                <td><button class="btn btn-primary" (click)= "insertFile(TypeGost)">Вставить</button></td>
+                <td><button class="btn btn-primary" (click)="insertFile(TypeGost)">Вставить</button></td>
             </tr>
         </tbody>
     </table>
