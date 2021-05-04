@@ -1,28 +1,12 @@
 <div class="container">
-    <div class="input-group flex-nowrap" style="margin-bottom: 10px;">
-        <input type="text" class="form-control" placeholder="Поиск" aria-label="" aria-describedby="addon-wrapping" #searchInput>
+    <div class="input-group flex-nowrap" style="margin: 10px 0px;">
+        <input type="text" class="form-control" placeholder="Поиск" aria-label="" aria-describedby="addon-wrapping"
+            [ngModel]="searchStr" (ngModelChange)="changeSearchStr()" #searchInput>
     </div>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">GOST</th>
-                <th scope="col">TYPE</th>
-                <th scope="col">MODEL_URL</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let gost of gosts | searchFilter:searchInput.value;">
-                <th>{{gost.ID}}</th>
-                <td>{{gost.GOST}}</td>
-                <td>{{gost.TYPE}}</td>
-                <td>{{gost.MODEL_URL}}</td>
-                <td><button class="btn btn-success" (click)="getTypeGOSTS(gost)">Выбрать</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: gosts; let i = index" [gost]="gost"
+            style="width: auto; height: auto;" id="gost-element"></app-gost-element>
+    </div>
 
     <table class="table table-striped">
         <thead>

@@ -1,4 +1,4 @@
-import { Component, Type } from '@angular/core';
+import { Component, ElementRef, Type, ViewChild } from '@angular/core';
 import { GostsService } from './services/gosts.service';
 
 @Component({
@@ -8,16 +8,23 @@ import { GostsService } from './services/gosts.service';
 })
 export class AppComponent {
   title = 'Interface';
+  searchStr: string;
   gosts: any[];
   gost: any;
   TypeGosts: any[];
+
+  @ViewChild('searchInput') searchInput: ElementRef;
+
   constructor(private gostsService: GostsService){
 
   }
 
+  changeSearchStr(){
+    this.searchStr = this.searchInput.nativeElement.value;
+  }
+
   async ngOnInit(){
     await this.getGosts();
-    // await this.getTypeGOSTS('8328-75');
   }
 
   async getGosts(){

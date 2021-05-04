@@ -5,12 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchFilterPipe implements PipeTransform {
 
-  transform(gostsList: any[], searchStr: string): any {
-    console.log(searchStr);
-    if(gostsList.length === 0 || searchStr === ""){
-      return gostsList;
+  transform(gosts: any, searchStr: string): any {
+    if(gosts === undefined || gosts.length == 0 || searchStr == "" || searchStr === undefined){
+      return gosts;
     }
-    return gostsList.filter(gost=>{
+    return gosts.filter(gost=>{
       if(gost.GOST.indexOf(searchStr)>=0){
         return true;
       }
