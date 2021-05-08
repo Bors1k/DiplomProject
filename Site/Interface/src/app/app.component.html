@@ -1,37 +1,15 @@
+<app-nav-bar></app-nav-bar>
+
 <div class="container">
+  
     <div class="input-group flex-nowrap" style="margin: 10px 0px;">
         <input type="text" class="form-control" placeholder="Поиск" aria-label="" aria-describedby="addon-wrapping"
             [ngModel]="searchStr" (ngModelChange)="changeSearchStr()" #searchInput>
     </div>
+
+    
     <div class="row">
         <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: gosts; let i = index" [gost]="gost"
             style="width: auto; height: auto;" id="gost-element"></app-gost-element>
     </div>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">GOST_ID</th>
-                <th scope="col">NUMBER</th>
-                <th scope="col">d mm</th>
-                <th scope="col">D mm</th>
-                <th scope="col">B mm</th>
-                <th scope="col">r mm</th>
-                <th scope="col">r1 mm</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let TypeGost of TypeGosts">
-                <th>{{TypeGost.GOST}}</th>
-                <td>{{TypeGost.NUMBER}}</td>
-                <td>{{TypeGost._d}}</td>
-                <td>{{TypeGost.D}}</td>
-                <td>{{TypeGost.B}}</td>
-                <td>{{TypeGost.r}}</td>
-                <td>{{TypeGost.r1}}</td>
-                <td><button class="btn btn-primary" (click)="insertFile(TypeGost)">Вставить</button></td>
-            </tr>
-        </tbody>
-    </table>
 </div>

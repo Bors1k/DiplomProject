@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { GOSTElementComponent } from './components/gost-element/gost-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchFilterPipe,
-    GOSTElementComponent
+    GOSTElementComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
