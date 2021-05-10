@@ -1,2 +1,13 @@
-<img src="" class="img-fluid" >
-<app-data-table></app-data-table>
+<img src="{{pic_url}}" class="rounded mx-auto d-block">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" *ngFor="let header of headers">{{header}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of TypeGosts">
+            <td scope="row" *ngFor="let header of headers">{{row[header]}}</td>
+        </tr>
+    </tbody>
+</table>

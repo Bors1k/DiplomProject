@@ -21,4 +21,8 @@ export class GostsService extends BaseApiService {
   getGostParams(gost: string, type: string){
     return this.get(`/${gost}/${type}`,this.options).toPromise();
   }
+
+  getGostUrls(gost: string, type: string){
+    return this.get(`/${gost}/${type}/get_params`,this.options).toPromise();
+  }
 }
