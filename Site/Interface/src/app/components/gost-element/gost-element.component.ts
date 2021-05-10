@@ -7,11 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class GOSTElementComponent implements OnInit {
 
-  @Input() gost: { GOST: string, TYPE: string, PIC_URL: string };
+  @Input() gost;
+  headers = ["GOST", "ID"];
+  routerLink: string;
   
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit(): void {
+    // for(var  key in this.gost){
+    //   if(this.gost.hasOwnProperty(key)){
+    //     console.log(key);
+    //     console.log(this.gost[key]);
+    //   }
+    // }
+    this.routerLink = "/" + this.gost[this.headers[0]] + "/" + this.gost[this.headers[1]];
+    console.log(this.gost);    
   }
 
 }

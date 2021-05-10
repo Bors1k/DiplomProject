@@ -9,13 +9,19 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { GOSTElementComponent } from './components/gost-element/gost-element.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { GostElementsListComponent } from './components/gost-elements-list/gost-elements-list.component';
+import { GostSizePageComponent } from './components/gost-size-page/gost-size-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchFilterPipe,
     GOSTElementComponent,
-    NavBarComponent
+    NavBarComponent,
+    DataTableComponent,
+    GostElementsListComponent,
+    GostSizePageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col" *ngFor="let header of headers">{{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of TypeGosts">
+        <td scope="row" *ngFor="let header of headers">{{row[header]}}</td>
+      </tr>
+    </tbody>
+  </table>

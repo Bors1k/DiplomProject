@@ -1,0 +1,9 @@
+<div class="input-group flex-nowrap" style="margin: 10px 0px;">
+    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" [ngModel]="searchStr" (ngModelChange)="changeSearchStr()" #searchInput>
+</div>
+
+
+<div class="row">
+    <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: gosts; let i = index" [gost]="gost"
+        style="width: auto; height: auto;" id="gost-element"></app-gost-element>
+</div>

@@ -2,9 +2,9 @@
     <div class="card" style="width: 18rem;" id="gost-element">
         <img src="{{gost.PIC_URL}}" class="card-img-top">
         <div class="card-body">
-            <h5 class="card-title">{{gost.GOST}}</h5>
-            <p class="card-text">{{gost.TYPE}}</p>
-            <a href="" class="card-link">Далее</a>
+            <h5 class="card-title">ГОСТ {{gost[headers[0]]}}</h5>
+            <p class="card-text">Тип {{gost.TYPE}}</p>
+            <a routerLink="{{routerLink}}" routerLinkActive="active" class="card-link">Далее</a>
         </div>
     </div>
 </div>
