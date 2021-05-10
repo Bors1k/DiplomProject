@@ -216,7 +216,7 @@ def run(context):
         # app.openedFromURL.add(onOpenedFromURL)
         # handlers.append(onOpenedFromURL)
 
-        ui.messageBox("The command is added to MODEL:ADD-INS panel.")
+        # ui.messageBox("The command is added to MODEL:ADD-INS panel.")
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))

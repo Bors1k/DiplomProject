@@ -6,7 +6,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of TypeGosts">
+        <tr *ngFor="let row of TypeGosts" (dblclick)="insertFile(row)" id="IsertString">
             <td scope="row" *ngFor="let header of headers">{{row[header]}}</td>
         </tr>
     </tbody>

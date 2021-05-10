@@ -1,10 +1,8 @@
 const mysql = require("mysql2");
 const express = require("express");
-const bodyParser = require("body-parser");
 const dbConfig = require("./app/config/db.config")
 
 const app = express();
-// const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const pool = mysql.createPool({
     connectionLimit: 5,
