@@ -3,8 +3,7 @@
 <div class="container">
   
     <div class="input-group flex-nowrap" style="margin: 10px 0px;">
-        <input type="text" class="form-control" placeholder="Поиск" aria-label="" aria-describedby="addon-wrapping"
-            [ngModel]="searchStr" (ngModelChange)="changeSearchStr()" #searchInput>
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" [ngModel]="searchStr" (ngModelChange)="changeSearchStr()" #searchInput>
     </div>
 
     
