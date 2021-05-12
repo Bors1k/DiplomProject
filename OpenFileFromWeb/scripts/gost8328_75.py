@@ -1,4 +1,8 @@
-import adsk.core, adsk.fusion, adsk.cam, traceback, math
+import adsk.core
+import adsk.fusion
+import adsk.cam
+import traceback
+import math
 
 
 # def run(parametres, Description):
@@ -22,12 +26,22 @@ def run(occurence, Description):
     r = float(params[3])
     r1 = float(params[4])
 
-    ADA = B*0.25
-    BID1 = d + (D-d)/3.33333333
-    KAD1 = BID1 + 1.33333 * (D-d)/3.33333333
-    KID1 = BID1 / 1.11111111111
+    if(True):
+        ADA = B*0.25
+        BID1 = d + (D-d)/3.33333333
+        KAD1 = BID1 + 1.33333 * (D-d)/3.33333333
+        KID1 = BID1 / 1.11111111111
 
-    CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
+        CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
+    else:
+        ADA = B*0.25
+        KAD1 = 0.7 * (D-d) + d
+        BAD1 = KAD1 / 1.111111
+        BID1 = BAD1 - (BAD1 - (D+d)*0.5) * 2 / 3
+        KID1 = d + 0.3 * (D-d)
+        
+        CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
+
 
     # Стандартные получалки
     app = adsk.core.Application.get()
@@ -42,16 +56,26 @@ def run(occurence, Description):
     sketchDimensions = sketches.sketchDimensions
     # Получаем коллекцию скруглений
     filletFeatures = occurence.component.features.filletFeatures
-    
-    # Вносим новые параметры
-    sketchDimensions[0].parameter.expression = str(B) + " mm"
-    sketchDimensions[1].parameter.expression = str(d) + " mm"
-    sketchDimensions[2].parameter.expression = str(ADA) + " mm"
-    sketchDimensions[3].parameter.expression = str(KID1) + " mm"
-    sketchDimensions[4].parameter.expression = str(BID1) + " mm"
-    sketchDimensions[5].parameter.expression = str(KAD1) + " mm"
-    sketchDimensions[8].parameter.expression = str(D) + " mm"
-    
+
+    if(True):
+        # Вносим новые параметры
+        sketchDimensions[0].parameter.expression = str(B) + " mm"
+        sketchDimensions[1].parameter.expression = str(d) + " mm"
+        sketchDimensions[2].parameter.expression = str(ADA) + " mm"
+        sketchDimensions[3].parameter.expression = str(KID1) + " mm"
+        sketchDimensions[4].parameter.expression = str(BID1) + " mm"
+        sketchDimensions[5].parameter.expression = str(KAD1) + " mm"
+        sketchDimensions[8].parameter.expression = str(D) + " mm"
+    else:
+        sketchDimensions[0].parameter.expression = str(d) + " mm"
+        sketchDimensions[1].parameter.expression = str(B) + " mm"
+        sketchDimensions[3].parameter.expression = str(D) + " mm"
+        sketchDimensions[4].parameter.expression = str(ADA) + " mm"
+        sketchDimensions[5].parameter.expression = str(BID1) + " mm"
+        sketchDimensions[6].parameter.expression = str(KID1) + " mm"
+        sketchDimensions[7].parameter.expression = str(BAD1) + " mm"
+        sketchDimensions[8].parameter.expression = str(KAD1) + " mm"
+
     # Изменяем количество цилиндров
     patternFeature.quantity.expression = str(CylCount)
 
