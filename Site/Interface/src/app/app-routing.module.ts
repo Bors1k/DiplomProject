@@ -6,7 +6,7 @@ import { GostSizePageComponent } from './components/gost-size-page/gost-size-pag
 
 const routes: Routes = [
   {path: '', component: GostElementsListComponent},
-  {path: ':GOST/:ID', component: GostSizePageComponent},
+  {path: ':GOST/:TYPE', component: GostSizePageComponent},
 
 ];
 

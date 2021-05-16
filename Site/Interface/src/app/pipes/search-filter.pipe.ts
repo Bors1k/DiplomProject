@@ -10,7 +10,9 @@ export class SearchFilterPipe implements PipeTransform {
       return gosts;
     }
     return gosts.filter(gost=>{
-      if(gost.GOST.indexOf(searchStr)>=0){
+      if(gost.GOST.toLowerCase().indexOf(searchStr.toLowerCase())>=0 || 
+      gost.INFO.toLowerCase().indexOf(searchStr.toLowerCase())>=0 || 
+      gost.TYPE.toLowerCase().indexOf(searchStr.toLowerCase())>=0){
         return true;
       }
       else return false;

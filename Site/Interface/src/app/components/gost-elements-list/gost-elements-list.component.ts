@@ -34,16 +34,4 @@ export class GostElementsListComponent implements OnInit {
       console.error(err);
     }
   }
-
-  async getTypeGOSTS(gost){
-    this.gost = gost;
-    try{
-      let TypeGosts = this.gostsService.getGostParams(gost.GOST,gost.ID)
-      this.TypeGosts =  await TypeGosts;
-    }
-    catch(err){
-      console.error(err);
-    }
-  }
-
 }

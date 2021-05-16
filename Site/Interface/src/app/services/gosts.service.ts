@@ -18,11 +18,11 @@ export class GostsService extends BaseApiService {
     return this.get('', this.options).toPromise();
   }
 
-  getGostParams(gost: string, type: string){
-    return this.get(`/${gost}/${type}`,this.options).toPromise();
+  getGostSizes(gost: string, type: string){
+    return this.get(`/${gost}/${type}/SIZES`,this.options).toPromise();
   }
 
-  getGostUrls(gost: string, type: string){
-    return this.get(`/${gost}/${type}/get_params`,this.options).toPromise();
+  getGostRow(gost: string, type: string){
+    return this.get(`/${gost}/${type}`,this.options).toPromise();
   }
 }

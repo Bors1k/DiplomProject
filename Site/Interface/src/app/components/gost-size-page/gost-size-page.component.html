@@ -1,4 +1,8 @@
-<img src="{{pic_url}}" class="rounded mx-auto d-block">
+<div class="clearfix">
+    <img src="{{pic_url}}" class="rounded mx-auto d-block">
+    <p></p>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -6,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of TypeGosts" (dblclick)="insertFile(row)" id="IsertString">
+        <tr *ngFor="let row of GostSizes" (dblclick)="insertFile(row)" id="IsertString">
             <td scope="row" *ngFor="let header of headers">{{row[header]}}</td>
         </tr>
     </tbody>

@@ -12,7 +12,7 @@ def run(context):
     ui = None
     try:
         # Переменные
-        params = {"d": 20, "D": 42, "B": 12, "r": 1.5, "r1": 0.8}
+        params = {"d": 240, "D": 440, "B": 72, "r": 5, "r1": 4}
         d = params["d"]
         D = params["D"]
         B = params["B"]

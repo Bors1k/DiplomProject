@@ -10,35 +10,35 @@ import { GostsService } from 'src/app/services/gosts.service';
 export class GostSizePageComponent implements OnInit {
 
   headers = [];
-  TypeGosts: any[];
+  GostSizes: any[];
   model_url: string;
   pic_url: string;
 
   GOST: any;
-  ID: any;
+  TYPE: any;
 
   constructor(private rout: ActivatedRoute, private gostsService: GostsService) {
     this.rout.paramMap.subscribe(params => {
       this.GOST = params.get("GOST");
-      this.ID = params.get("ID");
+      this.TYPE = params.get("TYPE");
     })
   }
 
    async ngOnInit() {
-    await this.getTypeGOSTS(this.GOST, this.ID);
+    await this.getTypeGOSTS(this.GOST, this.TYPE);
   }
 
-  async getTypeGOSTS(GOST, ID) {
+  async getTypeGOSTS(GOST, TYPE) {
     try {
-      this.TypeGosts = await this.gostsService.getGostParams(GOST, ID);
-      let URLS = await this.gostsService.getGostUrls(GOST,ID);
+      this.GostSizes = await this.gostsService.getGostSizes(GOST, TYPE);
+      let GostRow = (await this.gostsService.getGostRow(GOST,TYPE))[0];
 
-      this.model_url = URLS[0]["MODEL_URL"]
-      this.pic_url = URLS[0]["PIC_URL"]
+      this.model_url = GostRow["MODEL_URL"]
+      this.pic_url = GostRow["PIC_URL"]
 
-      let TypeGost = this.TypeGosts[0];
-      for(var key in TypeGost){
-        if(TypeGost.hasOwnProperty(key)){
+      let GostSize = this.GostSizes[0];
+      for(var key in GostSize){
+        if(GostSize.hasOwnProperty(key)){
           if(key != "GOST")
           this.headers.push(key);
         }
@@ -49,30 +49,29 @@ export class GostSizePageComponent implements OnInit {
     }
   }
 
-  insertFile(TypeGost: any) {
-      console.log(TypeGost);
+  insertFile(GostSizes: any) {
+      console.log(GostSizes);
       var properties = {
         "PartNumber": "",
-        "PartName": this.GOST + " " + TypeGost.NUMBER,
+        "PartName": this.GOST + " " + GostSizes.NUMBER,
         "Description": ""
       }
       window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(this.model_url) +
         "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
-        "&privateInfo=" + encodeURIComponent(this.setString(TypeGost)) +
-        "&id=" + encodeURIComponent(this.GOST + " " + TypeGost.NUMBER) + "&NoFit=true&NoMove=true"; //id будет формироваться как номергоста_номердетали
+        "&privateInfo=" + encodeURIComponent(this.setString(GostSizes)) +
+        "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true"; //id будет формироваться как номергоста_номердетали
         //это строго необходимо, т.к. при импорте детали, eсли id у деталей равны, он просто делает копию, и они связаны становятся
         //сейчас это тек.дата как временная заглушка
     }
   
-    setString(TypeGost) {
+    setString(GostSizes) {
       var str = "";
-      for(var key in TypeGost){
-        if(TypeGost.hasOwnProperty(key)){
+      for(var key in GostSizes){
+        if(GostSizes.hasOwnProperty(key)){
           if(key != "GOST" && key != "NUMBER")
-          str+=TypeGost[key] + "/";
+          str+=GostSizes[key] + "/";
         }
       }
-      console.log(str.slice(0,-1));
       return str.slice(0,-1);;
     }
 }
