@@ -28,7 +28,7 @@ export class GostElementsListComponent implements OnInit {
   async getGosts(){
     try{
       let gosts = this.gostsService.getAllGosts()
-      this.gosts =  await gosts;
+      this.gosts = await gosts;
     }
     catch(err){
       console.error(err);

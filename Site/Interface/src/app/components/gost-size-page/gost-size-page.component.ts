@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GostsService } from 'src/app/services/gosts.service';
+import { IGostRow } from '../../interfaces/GOST';
 
 @Component({
   selector: 'app-gost-size-page',
@@ -13,6 +14,7 @@ export class GostSizePageComponent implements OnInit {
   GostSizes: any[];
   model_url: string;
   pic_url: string;
+  GostRow: IGostRow;
 
   GOST: any;
   TYPE: any;
@@ -22,19 +24,23 @@ export class GostSizePageComponent implements OnInit {
       this.GOST = params.get("GOST");
       this.TYPE = params.get("TYPE");
     })
+    this.GostRow = {
+      ID: 1,
+      GOST: "",
+      TYPE: "",
+      MODEL_URL: "",
+      PiC_URL: "",
+      INFO: ""
+    }
   }
 
-   async ngOnInit() {
-    await this.getTypeGOSTS(this.GOST, this.TYPE);
-  }
-
-  async getTypeGOSTS(GOST, TYPE) {
+  async ngOnInit() {
     try {
-      this.GostSizes = await this.gostsService.getGostSizes(GOST, TYPE);
-      let GostRow = (await this.gostsService.getGostRow(GOST,TYPE))[0];
+      this.GostRow = (await this.gostsService.getGostRow(this.GOST,this.TYPE))[0];
+      this.GostSizes = await this.gostsService.getGostSizes(this.GOST, this.TYPE);
 
-      this.model_url = GostRow["MODEL_URL"]
-      this.pic_url = GostRow["PIC_URL"]
+      this.model_url = this.GostRow["MODEL_URL"]
+      this.pic_url = this.GostRow["PIC_URL"]
 
       let GostSize = this.GostSizes[0];
       for(var key in GostSize){
@@ -44,7 +50,7 @@ export class GostSizePageComponent implements OnInit {
         }
       }
     }
-    catch (err) {
+    catch(err){
       console.error(err);
     }
   }

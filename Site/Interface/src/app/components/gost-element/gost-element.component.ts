@@ -11,8 +11,7 @@ export class GOSTElementComponent implements OnInit {
   headers = ["GOST", "TYPE"];
   routerLink: string;
   
-  constructor() {
-   }
+  constructor() {}
 
   ngOnInit(): void {
     this.routerLink = "/" + this.gost[this.headers[0]] + "/" + this.gost[this.headers[1]];
