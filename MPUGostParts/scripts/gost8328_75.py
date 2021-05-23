@@ -32,7 +32,7 @@ def run(occurence, Info):
         KID1 = round(d + 0.3 * (D-d), 2)
 
         # посмотреть как вычисляется кол-во цилиндров
-        # CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
+        CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
 
     elif(gostType == "32000"):
         ADA = B * 0.25

@@ -24,12 +24,16 @@ def formatMsg(args):
     Info = {}
     try:
         Info["PARAMS"] = webArgs.privateInfo
-        Info["AppUID"] = (re.search('"AppUID": "\w+"',webArgs.properties)).group(0)
-        Info["AppUID"] = re.findall('\w+',Info["AppUID"])[1]
-        Info["GOST"] = (re.search('"GOST": "\w+"',webArgs.properties)).group(0)
-        Info["GOST"] = re.findall('\w+',Info["GOST"])[1]
-        Info["TYPE"] = (re.search('"TYPE": "\w+"',webArgs.properties)).group(0)
-        Info["TYPE"] = re.findall('\w+',Info["TYPE"])[1]  
+        Info["AppUID"] = (re.search('"AppUID":"\w*\-\w*\-\w*\-\w*\-\w*"', webArgs.properties)).group(0)
+        Info["AppUID"] = re.findall('\w*\-\w*\-\w*\-\w*\-\w*',Info["AppUID"])[0]
+
+        Info["GOST"] = (re.search('"GOST":"[^"]*"',webArgs.properties)).group(0)
+        Info["GOST"] = re.findall('"[^"]*"',Info["GOST"])[1]
+        Info["GOST"] = str(Info["GOST"]).replace("\"","")
+
+        Info["TYPE"] = (re.search('"TYPE":"[^"]*"',webArgs.properties)).group(0)
+        Info["TYPE"] = re.findall('"[^"]*"',Info["TYPE"])[1] 
+        Info["TYPE"] = str(Info["TYPE"]).replace("\"","") 
 
         return Info
     except:

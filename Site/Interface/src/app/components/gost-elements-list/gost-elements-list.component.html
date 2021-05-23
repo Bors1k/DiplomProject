@@ -4,7 +4,7 @@
 </div>
 
 
-<div class="row">
+<div class="row justify-content-center">
     <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr; let i = index" [gost]="gost"
         style="width: auto; height: auto;" id="gost-element"></app-gost-element>
 </div>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component,PipeTransform, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GostsService } from 'src/app/services/gosts.service';
 import { IGostRow } from '../../interfaces/GOST';
+
 
 @Component({
   selector: 'app-gost-size-page',
@@ -10,16 +11,22 @@ import { IGostRow } from '../../interfaces/GOST';
 })
 export class GostSizePageComponent implements OnInit {
 
+
   headers = [];
   GostSizes: any[];
   model_url: string;
   pic_url: string;
   GostRow: IGostRow;
+  DataSourse: any[];
 
   private APP_UID = "3854bc50-bbcc-11eb-8529-0242ac130003"
 
   GOST: any;
   TYPE: any;
+
+  page = 1;
+  pageSize = 20;
+  collectionSize;
 
   constructor(private rout: ActivatedRoute, private gostsService: GostsService) {
     this.rout.paramMap.subscribe(params => {
@@ -36,14 +43,19 @@ export class GostSizePageComponent implements OnInit {
     }
   }
 
+  refreshParams() {
+    this.DataSourse = this.GostSizes
+      .map((row, i) => ({id: i + 1, ...row}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+  
+
   async ngOnInit() {
     try {
       this.GostRow = (await this.gostsService.getGostRow(this.GOST,this.TYPE))[0];
       this.GostSizes = await this.gostsService.getGostSizes(this.GOST, this.TYPE);
-
       this.model_url = this.GostRow["MODEL_URL"]
       this.pic_url = this.GostRow["PIC_URL"]
-
       let GostSize = this.GostSizes[0];
       for(var key in GostSize){
         if(GostSize.hasOwnProperty(key)){
@@ -51,6 +63,8 @@ export class GostSizePageComponent implements OnInit {
           this.headers.push(key);
         }
       }
+      this.collectionSize = this.GostSizes.length;
+      this.refreshParams();
     }
     catch(err){
       console.error(err);
@@ -58,7 +72,7 @@ export class GostSizePageComponent implements OnInit {
   }
 
   insertFile(GostSizes: any) {
-      console.log(GostSizes);
+      console.log(GostSizes)
       var properties = {
         "PartNumber": "",
         "PartName": this.GOST + " " + GostSizes.NUMBER,
@@ -67,7 +81,7 @@ export class GostSizePageComponent implements OnInit {
         "GOST": this.GOST,
         "TYPE": this.TYPE
       }
-
+      console.log(properties)
       var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.model_url) +
       "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
       "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
@@ -80,10 +94,11 @@ export class GostSizePageComponent implements OnInit {
       var str = "";
       for(var key in GostSizes){
         if(GostSizes.hasOwnProperty(key)){
-          if(key != "GOST" && key != "NUMBER")
+          if(key != "GOST" && key != "NUMBER" && key != "id")
           str+=GostSizes[key] + "/";
         }
       }
-      return str.slice(0,-1);;
+      console.log(str.slice(0,-1));
+      return str.slice(0,-1);
     }
 }
