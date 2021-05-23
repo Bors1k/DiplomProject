@@ -27,19 +27,6 @@ app.get("/", function (req, res, next) {
     });
 });
 
-
-// app.get("/:COLUMN/:COLUMN_VALUE", function (req, res, next) {
-//     const COLUMN = req.params.COLUMN;
-//     const COLUMN_VALUE = req.params.COLUMN_VALUE;
-//     var queryStr = "SELECT * FROM `GOST_TYPES` WHERE `" + COLUMN + "` = ?";
-//     pool.query(queryStr, COLUMN_VALUE, function (err, data) {
-//         if (err) return console.log(err);
-//         console.log(data);
-//         res.json(data)
-//     });
-// });
-
-
 app.get("/:GOST", function (req, res, next) {
     const GOST = req.params.GOST;
     var queryStr = "SELECT * FROM `GOST_TYPES` WHERE GOST = ?";

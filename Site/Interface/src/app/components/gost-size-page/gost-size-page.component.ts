@@ -65,9 +65,7 @@ export class GostSizePageComponent implements OnInit {
       window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(this.model_url) +
         "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
         "&privateInfo=" + encodeURIComponent(this.setString(GostSizes)) +
-        "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true"; //id будет формироваться как номергоста_номердетали
-        //это строго необходимо, т.к. при импорте детали, eсли id у деталей равны, он просто делает копию, и они связаны становятся
-        //сейчас это тек.дата как временная заглушка
+        "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true"; 
     }
   
     setString(GostSizes) {

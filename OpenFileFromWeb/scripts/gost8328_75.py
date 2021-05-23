@@ -19,7 +19,7 @@ import math
 
 def run(occurence, Description):
     # Переменные
-    gostType = "32000"
+    gostType = "2000"
     params = Description.split("/")
     d = float(params[0])
     D = float(params[1])
