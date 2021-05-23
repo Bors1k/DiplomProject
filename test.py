@@ -1,10 +1,7 @@
+import re
+string = '{"Description": "wadaw"}'
+Info = {}
+Info["description"] = (re.search('"Description": "\w+"',string)).group(0)
+Info["description"] = re.findall('\w+',Info["description"])[1]
+print(Info)
 
-def run(Description):
-    params = Description.split("/")
-    ParamList = {"d": "42"}
-    # for param in params:
-    print(params[0])
-    # print(len(params))
-    
-
-run("45/24/24/4/4")

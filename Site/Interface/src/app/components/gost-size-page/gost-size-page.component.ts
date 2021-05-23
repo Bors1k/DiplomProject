@@ -16,6 +16,8 @@ export class GostSizePageComponent implements OnInit {
   pic_url: string;
   GostRow: IGostRow;
 
+  private APP_UID = "3854bc50-bbcc-11eb-8529-0242ac130003"
+
   GOST: any;
   TYPE: any;
 
@@ -60,15 +62,21 @@ export class GostSizePageComponent implements OnInit {
       var properties = {
         "PartNumber": "",
         "PartName": this.GOST + " " + GostSizes.NUMBER,
-        "Description": ""
+        "Description": "",
+        "AppUID": this.APP_UID,
+        "GOST": this.GOST,
+        "TYPE": this.TYPE
       }
-      window.location.href = "fusion360://command=insert&file=" + encodeURIComponent(this.model_url) +
-        "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
-        "&privateInfo=" + encodeURIComponent(this.setString(GostSizes)) +
-        "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true"; 
+
+      var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.model_url) +
+      "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
+      "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
+      "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true";
+
+      window.location.assign(NavigationUrl)
     }
   
-    setString(GostSizes) {
+    setPrivateInfo(GostSizes) {
       var str = "";
       for(var key in GostSizes){
         if(GostSizes.hasOwnProperty(key)){
