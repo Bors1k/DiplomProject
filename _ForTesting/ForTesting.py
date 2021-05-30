@@ -12,7 +12,7 @@ def run(context):
     ui = None
     try:
         # Переменные
-        params = {"d": 240, "D": 440, "B": 72, "r": 5, "r1": 4}
+        params = {"d": 300, "D": 540, "B": 85, "r": 1.5, "r1": 1.0}
         d = params["d"]
         D = params["D"]
         B = params["B"]
@@ -26,12 +26,14 @@ def run(context):
         # KID1 = round(d + 0.3 * (D-d),2)
 
         ADA = B * 0.25
-        KID1 = round((D+d - (D-d)/2.5)/2,2)
-        KAD1 = round(D - (0.5*(KID1-d))*2,2)
-        BAD1 = round(KAD1/1.111111,2)
+        BID1 = round((D-d)/3 + d, 2)
+        BAD1 = round(D-(D-d)/3, 2)
+        KID1 = round((D-d)/4.4444+d, 2)
+        KAD1 = round(d+D-KID1, 2)
 
-        CylCount = round(
-            math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
+
+        CylCount = round((math.pi * (D+d) / 2) /
+                         ((D - (KID1 - d) - KID1) / 2) / 2)
 
         # Стандартные получалки
         app = adsk.core.Application.get()
@@ -56,17 +58,19 @@ def run(context):
 
         # extrudeFeatures = component.features.extrudeFeatures
 
-        for dim in sketchDimensions:
-            _dim = dim.parameter.expression
-        ui = 0
+        # for dim in sketchDimensions:
+        #     _dim = dim.parameter.expression
+        # ui = 0
+
         # Вносим новые параметры
+        sketchDimensions[0].parameter.expression = str(d) + " mm"
         sketchDimensions[1].parameter.expression = str(B) + " mm"
-        sketchDimensions[2].parameter.expression = str(d) + " mm"
-        sketchDimensions[3].parameter.expression = str(KID1) + " mm"
-        sketchDimensions[4].parameter.expression = str(ADA) + " mm"
-        sketchDimensions[5].parameter.expression = str(D) + " mm"
-        sketchDimensions[6].parameter.expression = str(KAD1) + " mm"
-        sketchDimensions[7].parameter.expression = str(BAD1) + " mm"
+        sketchDimensions[2].parameter.expression = str(ADA) + " mm"
+        sketchDimensions[3].parameter.expression = str(D) + " mm"
+        sketchDimensions[4].parameter.expression = str(KAD1) + " mm"
+        sketchDimensions[5].parameter.expression = str(BAD1) + " mm"
+        sketchDimensions[6].parameter.expression = str(BID1) + " mm"
+        sketchDimensions[7].parameter.expression = str(KID1) + " mm"
 
         # Изменяем количество цилиндров
         # patternFeature.quantity.expression = str(CylCount)

@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GOSTElementComponent implements OnInit {
 
   @Input() gost;
-  headers = ["GOST", "TYPE"];
+  headers = ["GOST", "TYPE", "INFO"];
   routerLink: string;
   
   constructor() {}

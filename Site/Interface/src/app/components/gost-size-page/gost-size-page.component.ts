@@ -20,6 +20,7 @@ export class GostSizePageComponent implements OnInit {
   DataSourse: any[];
 
   private APP_UID = "3854bc50-bbcc-11eb-8529-0242ac130003"
+  private BaseLink = "http://localhost:4200/assets/models/"
 
   GOST: any;
   TYPE: any;
@@ -82,10 +83,16 @@ export class GostSizePageComponent implements OnInit {
         "TYPE": this.TYPE
       }
       console.log(properties)
-      var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.model_url) +
+      this.model_url
+      var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.BaseLink + this.model_url) +
       "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
       "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
       "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true";
+      
+      // var NavigationUrl = "fusion360://command=insert&file=" + encodeURIComponent(this.BaseLink) +
+      // "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
+      // "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
+      // "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true";
 
       window.location.assign(NavigationUrl)
     }
@@ -94,8 +101,10 @@ export class GostSizePageComponent implements OnInit {
       var str = "";
       for(var key in GostSizes){
         if(GostSizes.hasOwnProperty(key)){
-          if(key != "GOST" && key != "NUMBER" && key != "id")
-          str+=GostSizes[key] + "/";
+          if(key != "GOST" && key != "NUMBER" && key != "id"){
+            if(GostSizes[key]!='' && GostSizes[key]!='NULL' && GostSizes[key]!= null)
+            str+=GostSizes[key] + "/";
+          }
         }
       }
       console.log(str.slice(0,-1));

@@ -1,22 +1,9 @@
 <div style="text-align: center; margin-top: 10px;">
     <h3><b>ГОСТ {{GostRow.GOST}}</b></h3>
     <p>{{GostRow.INFO}}</p>
-    <p>Тип {{GostRow.TYPE}}</p>
+    <p><b>Тип {{GostRow.TYPE}}</b></p>
     <img src="{{pic_url}}" class="rounded mx-auto d-block">
 </div>
-
-<!-- <table class="table">
-    <thead>
-        <tr>
-            <th scope="col" *ngFor="let header of headers">{{header}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let row of GostSizes" (dblclick)="insertFile(row)" id="IsertString">
-            <td scope="row" *ngFor="let header of headers">{{row[header]}}</td>
-        </tr>
-    </tbody>
-</table> -->
 
 <table class="table table-striped">
     <thead>
@@ -28,7 +15,7 @@
     <tbody>
         <tr *ngFor="let row of DataSourse" (dblclick)="insertFile(row)" id="IsertString">
             <th scope="row">{{ row.id }}</th>
-            <td scope="row" *ngFor="let header of headers">{{row[header]}}</td>
+            <td scope="row" *ngFor="let header of headers" >{{row[header]}}</td>
         </tr>
     </tbody>
 </table>
