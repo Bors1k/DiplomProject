@@ -20,7 +20,7 @@ export class GostSizePageComponent implements OnInit {
   DataSourse: any[];
 
   private APP_UID = "3854bc50-bbcc-11eb-8529-0242ac130003"
-  private BaseLink = "http://localhost:4200/assets/models/"
+  private ModelsBaseLink = "http://localhost:4200/assets/models/"
 
   GOST: any;
   TYPE: any;
@@ -84,7 +84,7 @@ export class GostSizePageComponent implements OnInit {
       }
       console.log(properties)
       this.model_url
-      var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.BaseLink + this.model_url) +
+      var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.ModelsBaseLink + this.model_url) +
       "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
       "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
       "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true";

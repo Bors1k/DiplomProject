@@ -20,15 +20,22 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get("/", function (req, res, next) {
+app.get("/GOSTS", function (req, res, next) {
     pool.query("SELECT * FROM `GOST_TYPES`", function (err, data) {
         if (err) return console.log(err);
         console.log(data);
         res.json(data)
     });
 });
+app.get("/TreeView", function (req, res, next) {
+    pool.query("SELECT * FROM `treeviewtable`", function (err, data) {
+        if (err) return console.log(err);
+        console.log(data);
+        res.json(data)
+    });
+});
 
-app.get("/:GOST", function (req, res, next) {
+app.get("/GOSTS/:GOST", function (req, res, next) {
     const GOST = req.params.GOST;
     var queryStr = "SELECT * FROM `GOST_TYPES` WHERE GOST = ?";
     pool.query(queryStr, GOST, function (err, data) {
@@ -38,7 +45,7 @@ app.get("/:GOST", function (req, res, next) {
     });
 });
 
-app.get("/:GOST/:TYPE", function (req, res) {
+app.get("/GOSTS/:GOST/:TYPE", function (req, res) {
     const GOST = req.params.GOST;
     const TYPE = req.params.TYPE;
     var queryStr = "SELECT * FROM `GOST_TYPES` WHERE GOST = ? AND TYPE = ?"
@@ -49,21 +56,19 @@ app.get("/:GOST/:TYPE", function (req, res) {
     });
 });
 
-app.get("/:GOST/:TYPE/:COMMAND", function (req, res) {
+app.get("/GOSTS/:GOST/:TYPE/SIZES", function (req, res) {
     const GOST = req.params.GOST;
     const TYPE = req.params.TYPE;
     const COMMAND = req.params.COMMAND;
     var ID = 0;
-    if (COMMAND == "SIZES") {
-        var queryStr = "SELECT  `8328-75`.* " +
-            "FROM `GOST_TYPES` " +
-            "LEFT JOIN `8328-75` ON `8328-75`.`GOST` = `GOST_TYPES`.`ID` WHERE `GOST_TYPES`.`GOST` = ? AND `GOST_TYPES`.`TYPE` = ? "
-        pool.query(queryStr, [GOST, TYPE], function (err, data) {
-            if (err) return console.log(err);
-            console.log(data);
-            res.json(data);
-        });
-    }
+    var queryStr = "SELECT  `8328-75`.* " +
+        "FROM `GOST_TYPES` " +
+        "LEFT JOIN `8328-75` ON `8328-75`.`GOST` = `GOST_TYPES`.`ID` WHERE `GOST_TYPES`.`GOST` = ? AND `GOST_TYPES`.`TYPE` = ? "
+    pool.query(queryStr, [GOST, TYPE], function (err, data) {
+        if (err) return console.log(err);
+        console.log(data);
+        res.json(data);
+    });
 });
 
 app.listen(3000, function () {
