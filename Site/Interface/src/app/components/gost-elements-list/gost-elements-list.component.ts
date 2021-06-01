@@ -9,6 +9,7 @@ import { GostsService } from 'src/app/services/gosts.service';
 export class GostElementsListComponent implements OnInit {
 
   searchStr: string;
+  selectedCategory: number;
   gosts: any[];
   gost: any;
   TypeGosts: any[];
@@ -19,6 +20,10 @@ export class GostElementsListComponent implements OnInit {
 
   changeSearchStr(){
     this.searchStr = this.searchInput.nativeElement.value;
+  }
+
+  changeSelectedCategory(id: number){
+    this.selectedCategory = id;
   }
 
   async ngOnInit(){

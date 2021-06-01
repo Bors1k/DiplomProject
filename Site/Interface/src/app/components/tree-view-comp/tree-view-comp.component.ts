@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { TreeviewService } from 'src/app/services/treeview.service';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { massive } from './json.json'
 
 interface PartsNode {
   idTreeViewTable: any;
@@ -11,55 +10,26 @@ interface PartsNode {
   children?: PartsNode[];
 }
 
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
-
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [
-      {name: 'Apple'},
-      {name: 'Banana'},
-      {name: 'Fruit loops'},
-    ]
-  }, {
-    name: 'Vegetables',
-    children: [
-      {
-        name: 'Green',
-        children: [
-          {name: 'Broccoli'},
-          {name: 'Brussels sprouts'},
-        ]
-      }, {
-        name: 'Orange',
-        children: [
-          {name: 'Pumpkins'},
-          {name: 'Carrots'},
-        ]
-      },
-    ]
-  },
-];
-
 @Component({
   selector: 'app-tree-view-comp',
   templateUrl: './tree-view-comp.component.html',
   styleUrls: ['./tree-view-comp.component.css']
 })
+
 export class TreeViewCompComponent {
+
+  @Output() selectCategoryEvent = new EventEmitter<number>();
 
   treeControl = new NestedTreeControl<PartsNode>(node => node.children)
   treeViewData = new MatTreeNestedDataSource<PartsNode>();
   jsondata: any;
 
   constructor(private treeViewService: TreeviewService) { 
-    // console.log(TREE_DATA)
-    // console.log(massive)
-    // this.treeViewData.data = 
     this.OnInit()
+  }
+
+  selectCategory(id: number){
+    this.selectCategoryEvent.emit(id);
   }
 
   async OnInit() {
@@ -81,8 +51,6 @@ export class TreeViewCompComponent {
     });
     console.log(treeViewData[0])
     this.treeViewData.data = [treeViewData[0]]
-    // this.treeViewData.data = treeViewData[]
-    // console.log(this.treeViewData.data)
   }
 
   hasChild = (_:number, node: PartsNode)=>!!node.children && node.children.length > 0;

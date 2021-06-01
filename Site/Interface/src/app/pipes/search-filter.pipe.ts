@@ -5,14 +5,22 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchFilterPipe implements PipeTransform {
 
-  transform(gosts: any, searchStr: string): any {
-    if(gosts === undefined || gosts.length == 0 || searchStr == "" || searchStr === undefined){
+  transform(gosts: any, searchStr: string, categoryID: number): any {
+    console.log(categoryID)
+    console.log(searchStr)
+    if((gosts === undefined || gosts.length == 0 || searchStr == "" || searchStr === undefined) && (categoryID == 1 || categoryID == undefined)){
       return gosts;
     }
     return gosts.filter(gost=>{
-      if(gost.GOST.toLowerCase().indexOf(searchStr.toLowerCase())>=0 || 
+      if(searchStr==undefined || searchStr==''){
+        if(gost.TREE_VIEW_ID==categoryID){
+          return true;
+        }
+      }
+      else if(gost.TREE_VIEW_ID == categoryID && (gost.GOST.toLowerCase().indexOf(searchStr.toLowerCase())>=0 || 
       gost.INFO.toLowerCase().indexOf(searchStr.toLowerCase())>=0 || 
-      gost.TYPE.toLowerCase().indexOf(searchStr.toLowerCase())>=0){
+      gost.TYPE.toLowerCase().indexOf(searchStr.toLowerCase())>=0))
+      {
         return true;
       }
       else return false;
