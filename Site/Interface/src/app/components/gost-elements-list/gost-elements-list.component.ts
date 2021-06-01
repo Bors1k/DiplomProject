@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GostsService } from 'src/app/services/gosts.service';
+import { IGostRow } from '../../interfaces/GOST';
 
 @Component({
   selector: 'app-gost-elements-list',
@@ -10,9 +11,9 @@ export class GostElementsListComponent implements OnInit {
 
   searchStr: string;
   selectedCategory: number;
-  gosts: any[];
-  gost: any;
-  TypeGosts: any[];
+  gosts: IGostRow[];
+  gost: IGostRow;
+
 
   @ViewChild('searchInput') searchInput: ElementRef;
   

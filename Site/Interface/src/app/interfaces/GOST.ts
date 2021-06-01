@@ -6,5 +6,5 @@ export interface IGostRow {
     PIC_URL: string;
     INFO: string;
     TREE_VIEW_ID: number;
-
+    // TREE_VIEW_ID_PARENTS?: number[];
 }

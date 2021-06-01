@@ -1,11 +1,15 @@
-<div class="col-sm-6" *ngIf="gost[headers[2]]!='none'">
-    <div class="card" style="width: 15rem; margin-bottom: 10px;" id="gost-element">
-        <img src="{{gost.PIC_URL}}" class="card-img-top">
+    <div class="card mb-3" style="max-width: 540px;" *ngIf="gost[headers[2]]!='none'" id="gost-element">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{gost.PIC_URL}}" class="card-img mx-auto d-block">
+      </div>
+      <div class="col-md-8">
         <div class="card-body">
             <h5 class="card-title">ГОСТ {{gost[headers[0]]}}</h5>
             <p class="card-text">{{gost[headers[2]]}}</p>
             <p class="card-text"><b>Тип {{gost[headers[1]]}}</b></p>
             <a routerLink="{{routerLink}}" routerLinkActive="active" class="card-link">Далее</a>
         </div>
+      </div>
     </div>
-</div>
+  </div>

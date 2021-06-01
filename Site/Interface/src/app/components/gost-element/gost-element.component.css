@@ -2,3 +2,8 @@
     box-shadow: 0 0 10px gray;
 }
 
+img {
+    width:  179px;
+    height: 179px;
+    object-fit: cover;
+}
