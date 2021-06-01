@@ -3,6 +3,8 @@ export interface IGostRow {
     GOST: string;
     TYPE: string;
     MODEL_URL: string;
-    PiC_URL: string;
+    PIC_URL: string;
     INFO: string;
+    TREE_VIEW_ID: number;
+
 }

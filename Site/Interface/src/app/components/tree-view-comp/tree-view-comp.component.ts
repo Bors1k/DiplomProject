@@ -20,9 +20,9 @@ export class TreeViewCompComponent {
 
   @Output() selectCategoryEvent = new EventEmitter<number>();
 
+
   treeControl = new NestedTreeControl<PartsNode>(node => node.children)
   treeViewData = new MatTreeNestedDataSource<PartsNode>();
-  jsondata: any;
 
   constructor(private treeViewService: TreeviewService) { 
     this.OnInit()
@@ -30,6 +30,11 @@ export class TreeViewCompComponent {
 
   selectCategory(id: number){
     this.selectCategoryEvent.emit(id);
+  }
+
+  collapseAll(){
+    this.treeControl.collapseAll()
+    this.selectCategoryEvent.emit(1)
   }
 
   async OnInit() {
@@ -49,7 +54,6 @@ export class TreeViewCompComponent {
         }
       });
     });
-    console.log(treeViewData[0])
     this.treeViewData.data = [treeViewData[0]]
   }
 

@@ -39,8 +39,9 @@ export class GostSizePageComponent implements OnInit {
       GOST: "",
       TYPE: "",
       MODEL_URL: "",
-      PiC_URL: "",
-      INFO: ""
+      PIC_URL: "",
+      INFO: "",
+      TREE_VIEW_ID: null
     }
   }
 

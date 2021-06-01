@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchFilterPipe implements PipeTransform {
 
   transform(gosts: any, searchStr: string, categoryID: number): any {
-    console.log(categoryID)
-    console.log(searchStr)
     if((gosts === undefined || gosts.length == 0 || searchStr == "" || searchStr === undefined) && (categoryID == 1 || categoryID == undefined)){
       return gosts;
     }

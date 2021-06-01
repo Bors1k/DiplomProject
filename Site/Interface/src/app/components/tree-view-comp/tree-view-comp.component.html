@@ -1,4 +1,7 @@
-<mat-tree [dataSource]="treeViewData" [treeControl]="treeControl" class="example-tree">
+<button type="button" class="btn btn-outline-dark" (click)="collapseAll()">Свернуть все</button>
+<!-- <button type="button" class="btn btn-outline-dark" (click)="resetFilters()">Сбросить фильтры</button> -->
+
+<mat-tree #tree [dataSource]="treeViewData" [treeControl]="treeControl" class="category-tree">
 
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle (click)="selectCategory(node.idTreeViewTable)">
         {{node.name}}
@@ -14,7 +17,7 @@
             {{node.name}}
         </div>
 
-        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+        <div [class.category-tree-invisible]="!treeControl.isExpanded(node)" role="group">
             <ng-container matTreeNodeOutlet></ng-container>
         </div>
     </mat-nested-tree-node>

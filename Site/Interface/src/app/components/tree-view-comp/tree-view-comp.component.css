@@ -1,8 +1,8 @@
-.example-tree-invisible {
+.category-tree-invisible {
     display: none;
 }
 
-.example-tree ul, .example-tree li {
+.category-tree ul, .category-tree li {
     margin-top: 0;
     margin-bottom: 0;
     list-style-type: none;
@@ -12,7 +12,7 @@
    * This padding sets alignment of the nested nodes.
    */
 
-.example-tree .mat-nested-tree-node div[role=group] {
+.category-tree .mat-nested-tree-node div[role=group] {
     padding-left: 40px;
 }
 
@@ -22,6 +22,16 @@
    * under the same parent.
    */
 
-.example-tree div[role=group]>.mat-tree-node {
+.category-tree div[role=group]>.mat-tree-node {
     padding-left: 40px;
+}
+
+
+mat-tree-node:hover{
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 5px;
+}
+mat-nested-tree-node:hover{
+    cursor: pointer;
 }
