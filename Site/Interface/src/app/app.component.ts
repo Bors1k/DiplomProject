@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, ElementRef, Type, ViewChild } from '@angular/core';
 // import { GostsService } from './services/gosts.service';
 
@@ -9,7 +10,11 @@ import { Component, ElementRef, Type, ViewChild } from '@angular/core';
 export class AppComponent {
   title = 'GOST components library';
 
-  constructor(){
+  constructor(private scroll: ViewportScroller){
 
+  }
+
+  scrollToTop(){
+    this.scroll.scrollToPosition([0,0]);
   }
 }
