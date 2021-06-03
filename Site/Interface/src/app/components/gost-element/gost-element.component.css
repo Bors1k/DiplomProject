@@ -1,9 +1,9 @@
-#gost-element:hover{
+#gostElement:hover{
     box-shadow: 0 0 10px gray;
 }
 
 img {
-    width:  179px;
-    height: 179px;
+    width:  150px;
+    height: 150px;
     object-fit: cover;
 }

@@ -61,9 +61,9 @@ app.get("/GOSTS/:GOST/:TYPE/SIZES", function (req, res) {
     const TYPE = req.params.TYPE;
     const COMMAND = req.params.COMMAND;
     var ID = 0;
-    var queryStr = "SELECT  `8328-75`.* " +
+    var queryStr = "SELECT  `"+GOST+"`.* " +
         "FROM `GOST_TYPES` " +
-        "LEFT JOIN `8328-75` ON `8328-75`.`GOST` = `GOST_TYPES`.`ID` WHERE `GOST_TYPES`.`GOST` = ? AND `GOST_TYPES`.`TYPE` = ? "
+        "LEFT JOIN `"+GOST+"` ON `"+GOST+"`.`GOST` = `GOST_TYPES`.`ID` WHERE `GOST_TYPES`.`GOST` = ? AND `GOST_TYPES`.`TYPE` = ? "
     pool.query(queryStr, [GOST, TYPE], function (err, data) {
         if (err) return console.log(err);
         console.log(data);

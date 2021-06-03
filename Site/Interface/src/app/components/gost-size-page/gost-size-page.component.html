@@ -1,34 +1,36 @@
-<div style="text-align: center; margin-top: 10px;">
-    <h3><b>ГОСТ {{GostRow.GOST}}</b></h3>
-    <p>{{GostRow.INFO}}</p>
-    <p><b>Тип {{GostRow.TYPE}}</b></p>
-    <img src="{{pic_url}}" class="rounded mx-auto d-block">
-</div>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col" *ngFor="let header of headers">{{header}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let row of DataSourse" (dblclick)="insertFile(row)" id="IsertString">
-            <th scope="row">{{ row.id }}</th>
-            <td scope="row" *ngFor="let header of headers" >{{row[header]}}</td>
-        </tr>
-    </tbody>
-</table>
-
-<div class="d-flex justify-content-between p-2">
-    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshParams()" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
-        <ng-template ngbPaginationNumber let-p>{{ p }}</ng-template>
-    </ngb-pagination>
-
-    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshParams()">
-        <option [ngValue]="20">20 строк на страницу</option>
-        <option [ngValue]="40">40 строк на страницу</option>
-        <option [ngValue]="60">60 строк на страницу</option>
-    </select>
+<div style="padding-bottom: 25px">
+    <div style="text-align: center; margin-top: 10px;">
+        <h3><b>ГОСТ {{GostRow.GOST}}</b></h3>
+        <p>{{GostRow.INFO}}</p>
+        <p><b>Тип {{GostRow.TYPE}}</b></p>
+        <img src="{{pic_url}}" class="rounded mx-auto d-block">
+    </div>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" *ngFor="let header of headers">{{header}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of DataSourse" (dblclick)="insertFile(row)" id="IsertString">
+                <th scope="row">{{ row.id }}</th>
+                <td scope="row" *ngFor="let header of headers" >{{row[header]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refreshParams()" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+            <ng-template ngbPaginationNumber let-p>{{ p }}</ng-template>
+        </ngb-pagination>
+    
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshParams()">
+            <option [ngValue]="20">20 строк на страницу</option>
+            <option [ngValue]="40">40 строк на страницу</option>
+            <option [ngValue]="60">60 строк на страницу</option>
+        </select>
+    </div>
 </div>

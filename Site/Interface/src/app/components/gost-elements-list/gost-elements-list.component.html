@@ -1,15 +1,17 @@
-<div class="input-group flex-nowrap" style="margin: 10px 0px;">
-    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" [ngModel]="searchStr"
-        (ngModelChange)="changeSearchStr()" #searchInput>
-</div>
-<div class="row justify-content-md-center">
-    <div class="col-md-4">
-        <app-tree-view-comp (selectCategoryEvent)="changeSelectedCategory($event)"></app-tree-view-comp>
+<div style="padding-bottom: 40px;">
+    <div class="input-group flex-nowrap" style="margin: 10px 0px;">
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" [ngModel]="searchStr"
+            (ngModelChange)="changeSearchStr()" #searchInput>
     </div>
-    <div class="col">
-        <div class="row justify-content-md-center">
-            <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: selectedCategory; let i = index" [gost]="gost"
-                style="width: auto; height: auto;" id="gost-element"></app-gost-element>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <app-tree-view-comp (selectCategoryEvent)="changeSelectedCategory($event)"></app-tree-view-comp>
+        </div>
+        <div class="col">
+            <div class="row justify-content-md-center">
+                <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: selectedCategory; let i = index"
+                    [gost]="gost" style="width: auto; height: auto;" id="gost-element"></app-gost-element>
+            </div>
         </div>
     </div>
 </div>
