@@ -45,6 +45,16 @@ app.get("/GOSTS/:GOST", function (req, res, next) {
     });
 });
 
+app.get("/HEADERS/:ID", function (req, res, next) {
+    const ID = req.params.ID;
+    var queryStr = "SELECT headers FROM `pageSizeHeaders` WHERE gostTypesId = ?";
+    pool.query(queryStr, ID, function (err, data) {
+        if (err) return console.log(err);
+        console.log(data);
+        res.json(data);
+    });
+});
+
 app.get("/GOSTS/:GOST/:TYPE", function (req, res) {
     const GOST = req.params.GOST;
     const TYPE = req.params.TYPE;

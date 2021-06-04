@@ -55,7 +55,6 @@ export class TreeViewCompComponent {
       });
     });
     this.treeViewData.data = [treeViewData[0]]
-    console.log(treeViewData[0])
   }
   hasChild = (_:number, node: PartsNode)=>!!node.children && node.children.length > 0;
 }

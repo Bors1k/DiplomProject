@@ -25,4 +25,7 @@ export class GostsService extends BaseApiService {
   getGostRow(gost: string, type: string){
     return this.get(`/GOSTS/${gost}/${type}`,this.options).toPromise();
   }
+  getSizeHeaders(id: number){
+    return this.get(`/HEADERS/${id}`,this.options).toPromise();
+  }
 }

@@ -18,6 +18,7 @@ export class GostSizePageComponent implements OnInit {
   pic_url: string;
   GostRow: IGostRow;
   DataSourse: any[];
+  SizeHeaderDescriptions: any;
 
   private APP_UID = "3854bc50-bbcc-11eb-8529-0242ac130003"
   private ModelsBaseLink = "http://localhost:4200/assets/models/"
@@ -56,6 +57,7 @@ export class GostSizePageComponent implements OnInit {
     try {
       this.GostRow = (await this.gostsService.getGostRow(this.GOST,this.TYPE))[0];
       this.GostSizes = await this.gostsService.getGostSizes(this.GOST, this.TYPE);
+      this.SizeHeaderDescriptions = (await this.gostsService.getSizeHeaders(this.GostRow.ID))[0].headers.split("/")
       this.model_url = this.GostRow["MODEL_URL"]
       this.pic_url = this.GostRow["PIC_URL"]
       let GostSize = this.GostSizes[0];
