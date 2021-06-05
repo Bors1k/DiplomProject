@@ -13,7 +13,7 @@ COMMANDNAME = 'Insert MPUGostParts Supplier Components'
 COMMANDDESCRIPTION = 'With MPUGostParts, boost your design productivity and access millions of GOST models from hundreds of supplier catalogs.'
 URL = 'http://localhost:4200/'
 PALETTEID = 'MPUGostParts_browser'
-PALETTENAME = 'Autodesk Fusion 360 GOST Library - powered by MPUGostParts'
+PALETTENAME = 'Autodesk Fusion 360 GOST Library - powered by MPU'
 DOCKINGSTATE = adsk.core.PaletteDockingStates.PaletteDockStateRight
 APP_UID = '3854bc50-bbcc-11eb-8529-0242ac130003'
 
@@ -56,6 +56,7 @@ class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
                     occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
 
                     if(Info["GOST"]=="8328-75"):
+                        
                         gost8328_75.run(occurence,Info)
         except:
             if ui:
@@ -120,7 +121,7 @@ def createPalette():
         isVisible=True,
         showCloseButton=True,
         isResizable=True,
-        width=650,
+        width=1500,
         height=600,
         useNewWebBrowser=True
     )
