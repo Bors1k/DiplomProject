@@ -5,7 +5,7 @@ import adsk.core
 from urllib.parse import urlparse
 from .utils import addHandler, handleError, clearHandlers, ui
 import traceback, re
-from .scripts import gost8328_75
+from .scripts import gost8328_75,gost7634_75
 
 # необходимо все еще править
 COMMANDID = 'MPUGostParts_insert'
@@ -56,8 +56,9 @@ class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
                     occurence = rootComp.occurrences.item(rootComp.occurrences.count-1)
 
                     if(Info["GOST"]=="8328-75"):
-                        
                         gost8328_75.run(occurence,Info)
+                    elif(Info["GOST"]=="7634-75"):
+                        gost7634_75.run(occurence,Info)
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))

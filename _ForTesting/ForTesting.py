@@ -12,7 +12,7 @@ def run(context):
     ui = None
     try:
         # Переменные
-        params = {"d": 25, "D": 47, "B": 16, "r": 1}
+        params = {"d": 170, "D": 260, "B": 160, "r": 3.5}
         d = params["d"]
         D = params["D"]
         B = params["B"]
@@ -20,7 +20,7 @@ def run(context):
 
         _d = B/12 + d
 
-        CylCount = round((d+D)*math.pi/((D-d)/4)/4)
+        CylCount = round((d+D)*math.pi/((D-d)/5)/4)
 
         # Стандартные получалки
         app = adsk.core.Application.get()
@@ -47,6 +47,8 @@ def run(context):
         # combineFeatures.targetBody
         i = 0
         # extrudeFeatures = component.features.extrudeFeatures
+        _params = {"d": 100, "D": 140, "B": 40, "r": 2}
+
         # boolean = True
         # i = 0
         # num = -1
@@ -60,38 +62,44 @@ def run(context):
         #         boolean = False
 
         # Вносим новые параметры
-        sketchDimensions[2].parameter.expression = str(D) + " mm"
-        sketchDimensions[3].parameter.expression = str(d) + " mm"
-        sketchDimensions[4].parameter.expression = str(B/7) + " mm"
-        sketchDimensions[5].parameter.expression = str(B*2/7) + " mm"
-        sketchDimensions[6].parameter.expression = str(B) + " mm"
-        sketchDimensions[7].parameter.expression = str((D-d)/4) + " mm"
-        sketchDimensions[8].parameter.expression = str((D-d)/4) + " mm"
-        sketchDimensions[9].parameter.expression = str((D-d)/8) + " mm"
-        sketchDimensions[10].parameter.expression = str(B*2/7) + " mm"
-        sketchDimensions[11].parameter.expression = str((D-d)/16) + " mm"
-        sketchDimensions[12].parameter.expression = str(_d) + " mm"
+        # sketchDimensions[3].parameter.expression = str(D) + " mm"
+        # sketchDimensions[0].parameter.expression = str(d) + " mm"
+        # sketchDimensions[4].parameter.expression = str(B) + " mm"
+        # sketchDimensions[5].parameter.expression = str((D-d)/5) + " mm"
+        # sketchDimensions[6].parameter.expression = str((B/9-0.5)/2+0.5) + " mm"
+        # sketchDimensions[7].parameter.expression = str((D-d)/5/2) + " mm"
+        # sketchDimensions[8].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[10].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[12].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[14].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[16].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[18].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[21].parameter.expression = str(B/9 - 0.5) + " mm"
+
+        # sketchDimensions[7].parameter.expression = str((D-d)/16) + " mm"
+        # # sketchDimensions[8].parameter.expression = str(_d) + " mm"
+        # sketchDimensions[10].parameter.expression = str((D-d)/8) + " mm"
+        # sketchDimensions[11].parameter.expression = str((D-d)/8) + " mm"
+
 
         # Изменяем количество цилиндров
         patternFeature.quantity.expression = str(CylCount)
 
-        # Правим скругления
-        filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"
-        # filletFeatures[1].edgeSets[0].radius.expression = str(r1) + " mm"
+        # # Правим скругления
+        # filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"
+        # # filletFeatures[1].edgeSets[0].radius.expression = str(r1) + " mm"
 
-        combineFeature = component.features.combineFeatures[0]
+        # combineFeature = component.features.combineFeatures[0]
 
-        toolBodies = adsk.core.ObjectCollection.create()
-        for body in revolveFeatures[1].bodies:
-            toolBodies.add(body)
-        for body in patternFeature.bodies:
-            toolBodies.add(body)
+        # toolBodies = adsk.core.ObjectCollection.create()
+        # for body in revolveFeatures[1].bodies:
+        #     toolBodies.add(body)
+        # for body in patternFeature.bodies:
+        #     toolBodies.add(body)
         
-        combineFeature.timelineObject.rollTo(True)
-        combineFeature.toolBodies = toolBodies
-        combineFeature.timelineObject.rollTo(False)
-
-        # combineFeatures.targetBody = revolveFeatures[2].bodies[0]
+        # combineFeature.timelineObject.rollTo(True)
+        # combineFeature.toolBodies = toolBodies
+        # combineFeature.timelineObject.rollTo(False)
 
         u = 0
     except:
