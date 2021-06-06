@@ -58,8 +58,8 @@ app.get("/HEADERS/:ID", function (req, res, next) {
 app.get("/GOSTS/:GOST/:TYPE", function (req, res) {
     const GOST = req.params.GOST;
     const TYPE = req.params.TYPE;
-    var queryStr = "SELECT * FROM `GOST_TYPES` WHERE GOST = ? AND TYPE = ?"
-    pool.query(queryStr, [GOST, TYPE], function (err, data) {
+    var queryStr = "SELECT * FROM `GOST_TYPES` WHERE GOST = '"+GOST+"' AND TYPE = '"+TYPE+"'"
+    pool.query(queryStr, function (err, data) {
         if (err) return console.log(err);
         console.log(data);
         res.json(data);

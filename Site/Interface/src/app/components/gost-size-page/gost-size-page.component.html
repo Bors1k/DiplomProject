@@ -3,7 +3,11 @@
         <h3><b>ГОСТ {{GostRow.GOST}}</b></h3>
         <p>{{GostRow.INFO}}</p>
         <p><b>Тип {{GostRow.TYPE}}</b></p>
-        <img src="{{pic_url}}" class="rounded mx-auto d-block">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto" *ngFor="let pic_url of pic_urls">
+                <img src="{{pic_url}}" class="rounded mx-auto d-block">
+            </div>
+        </div>
     </div>
     
     <table class="table table-striped">

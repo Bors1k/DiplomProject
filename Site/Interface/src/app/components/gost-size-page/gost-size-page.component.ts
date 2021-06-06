@@ -15,7 +15,7 @@ export class GostSizePageComponent implements OnInit {
   headers = [];
   GostSizes: any[];
   model_url: string;
-  pic_url: string;
+  pic_urls: string[];
   GostRow: IGostRow;
   DataSourse: any[];
   SizeHeaderDescriptions: any;
@@ -34,6 +34,7 @@ export class GostSizePageComponent implements OnInit {
     this.rout.paramMap.subscribe(params => {
       this.GOST = params.get("GOST");
       this.TYPE = params.get("TYPE");
+      console.log(this.TYPE)
     })
     this.GostRow = {
       ID: 1,
@@ -59,7 +60,7 @@ export class GostSizePageComponent implements OnInit {
       this.GostSizes = await this.gostsService.getGostSizes(this.GOST, this.TYPE);
       this.SizeHeaderDescriptions = (await this.gostsService.getSizeHeaders(this.GostRow.ID))[0].headers.split("/")
       this.model_url = this.GostRow["MODEL_URL"]
-      this.pic_url = this.GostRow["PIC_URL"]
+      this.pic_urls = this.GostRow["PIC_URL"].split(',')
       let GostSize = this.GostSizes[0];
       for(var key in GostSize){
         if(GostSize.hasOwnProperty(key)){

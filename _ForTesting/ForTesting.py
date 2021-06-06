@@ -6,6 +6,7 @@ import adsk.fusion
 import adsk.cam
 import traceback
 import math
+from . import gost7634_75K
 
 
 def run(context):
@@ -19,6 +20,8 @@ def run(context):
         r = params["r"]
 
         _d = B/12 + d
+
+        protochkParams = gost7634_75K.run(d,"16200")
 
         CylCount = round((d+D)*math.pi/((D-d)/5)/4)
 
@@ -43,38 +46,39 @@ def run(context):
         # filletFeatures = occurence.component.features.filletFeatures
         filletFeatures = component.features.filletFeatures
         revolveFeatures = component.features.revolveFeatures
-
+        holeFeature = component.features.holeFeatures[0]
         # combineFeatures.targetBody
         i = 0
         # extrudeFeatures = component.features.extrudeFeatures
         _params = {"d": 100, "D": 140, "B": 40, "r": 2}
 
-        # boolean = True
-        # i = 0
-        # num = -1
-        # while(boolean):
-        #     num = -1
-        #     for dim in sketchDimensions:
-        #         _dim = dim.parameter.expression
-        #         num = num + 1
-        #     i = i+1
-        #     if (i == 5):
-        #         boolean = False
+        boolean = True
+        i = 0
+        num = -1
+        while(boolean):
+            num = -1
+            for dim in sketchDimensions:
+                _dim = dim.parameter.expression
+                num = num + 1
+            i = i+1
+            if (i == 5):
+                boolean = False
 
         # Вносим новые параметры
-        # sketchDimensions[3].parameter.expression = str(D) + " mm"
-        # sketchDimensions[0].parameter.expression = str(d) + " mm"
+        # sketchDimensions[0].parameter.expression = str(D) + " mm"
+        # sketchDimensions[1].parameter.expression = str(d) + " mm"
+        # sketchDimensions[2].parameter.expression = str(B/7) + " mm"
+        # sketchDimensions[3].parameter.expression = str(B*2/7) + " mm"
         # sketchDimensions[4].parameter.expression = str(B) + " mm"
-        # sketchDimensions[5].parameter.expression = str((D-d)/5) + " mm"
-        # sketchDimensions[6].parameter.expression = str((B/9-0.5)/2+0.5) + " mm"
-        # sketchDimensions[7].parameter.expression = str((D-d)/5/2) + " mm"
-        # sketchDimensions[8].parameter.expression = str(B/9 - 0.5) + " mm"
-        # sketchDimensions[10].parameter.expression = str(B/9 - 0.5) + " mm"
-        # sketchDimensions[12].parameter.expression = str(B/9 - 0.5) + " mm"
-        # sketchDimensions[14].parameter.expression = str(B/9 - 0.5) + " mm"
-        # sketchDimensions[16].parameter.expression = str(B/9 - 0.5) + " mm"
-        # sketchDimensions[18].parameter.expression = str(B/9 - 0.5) + " mm"
-        # sketchDimensions[21].parameter.expression = str(B/9 - 0.5) + " mm"
+        # sketchDimensions[5].parameter.expression = str((D-d)/4) + " mm"
+        # sketchDimensions[6].parameter.expression = str(B*2/7) + " mm"
+        # sketchDimensions[7].parameter.expression = str((D-d)/16) + " mm"
+        # sketchDimensions[8].parameter.expression = str(_d) + " mm"
+        # sketchDimensions[11].parameter.expression = str((D-d)/8) + " mm"
+        # sketchDimensions[12].parameter.expression = str((D-d)/8) + " mm"
+
+        # sketchDimensions[13].parameter.expression = str(protochkParams["R"]*2) + " mm"
+        # sketchDimensions[15].parameter.expression = str(protochkParams["b0"]) + " mm"
 
         # sketchDimensions[7].parameter.expression = str((D-d)/16) + " mm"
         # # sketchDimensions[8].parameter.expression = str(_d) + " mm"
@@ -83,7 +87,10 @@ def run(context):
 
 
         # Изменяем количество цилиндров
-        patternFeature.quantity.expression = str(CylCount)
+        # patternFeature.quantity.expression = str(CylCount)
+
+        # Изменяем отверстие для смазки
+        # holeFeature.holeDiameter.expression = str(protochkParams["d0"]) + "mm"
 
         # # Правим скругления
         # filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"

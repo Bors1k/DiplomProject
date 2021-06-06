@@ -29,8 +29,11 @@ def run(occurence, Info):
     filletFeature = occurence.component.features.filletFeatures[0]
     # получаем вращение
     revolveFeature = occurence.component.features.revolveFeatures[1]
+    # получаем отверстие
+    if("k" in gostType):
+        holeFeature = occurence.component.features.holeFeatures[0]
 
-    if(gostType=="16200"):
+    if(gostType=="162000" or gostType=="1 - 162000k" or gostType=="2 - 162000k"):
         # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(D) + " mm"
         sketchDimensions[1].parameter.expression = str(d) + " mm"
@@ -44,7 +47,13 @@ def run(occurence, Info):
         sketchDimensions[11].parameter.expression = str((D-d)/8) + " mm"
         sketchDimensions[12].parameter.expression = str((D-d)/8) + " mm"
 
-    elif(gostType=="18200"):
+        if ("1 -" in gostType):
+            sketchDimensions[13].parameter.expression = str(protochkParams["R"]*2) + " mm"
+            sketchDimensions[14].parameter.expression = str(protochkParams["t"]) + " mm"
+        if ("2 -" in gostType):
+            sketchDimensions[15].parameter.expression = str(protochkParams["b0"]) + " mm"
+
+    elif(gostType=="182000" or gostType=="1 - 182000k" or gostType=="2 - 182000k"):
         # Вносим новые параметры
         sketchDimensions[2].parameter.expression = str(D) + " mm"
         sketchDimensions[3].parameter.expression = str(d) + " mm"
@@ -58,7 +67,13 @@ def run(occurence, Info):
         sketchDimensions[11].parameter.expression = str((D-d)/16) + " mm"
         sketchDimensions[12].parameter.expression = str(_d) + " mm"
 
-    elif(gostType=="26200"):
+        if ("1 -" in gostType):
+            sketchDimensions[13].parameter.expression = str(protochkParams["R"]*2) + " mm"
+            sketchDimensions[14].parameter.expression = str(protochkParams["t"]) + " mm"
+        if ("2 -" in gostType):
+            sketchDimensions[15].parameter.expression = str(protochkParams["b0"]) + " mm"
+
+    elif(gostType=="262000" or gostType=="1 - 262000k" or gostType=="2 - 262000k"):
         # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(D) + " mm"
         sketchDimensions[1].parameter.expression = str(d) + " mm"
@@ -71,7 +86,14 @@ def run(occurence, Info):
         sketchDimensions[10].parameter.expression = str((D-d)/8) + " mm"
         sketchDimensions[11].parameter.expression = str((D-d)/8) + " mm"
 
-    elif(gostType=="28200"):
+        if ("1 -" in gostType):
+            sketchDimensions[12].parameter.expression = str(protochkParams["R"]*2) + " mm"
+            sketchDimensions[13].parameter.expression = str(protochkParams["t"]) + " mm"
+        if ("2 -" in gostType):
+            sketchDimensions[14].parameter.expression = str(protochkParams["b0"]) + " mm"
+
+
+    elif(gostType=="28200" or gostType=="1 - 282000k" or gostType=="2 - 282000k"):
         # Вносим новые параметры
         sketchDimensions[2].parameter.expression = str(D) + " mm"
         sketchDimensions[3].parameter.expression = str(d) + " mm"
@@ -84,7 +106,13 @@ def run(occurence, Info):
         sketchDimensions[10].parameter.expression = str(B*2/7) + " mm"
         sketchDimensions[11].parameter.expression = str((D-d)/16) + " mm"
     
-    elif(gostType=="452000"):
+        if ("1 -" in gostType):
+            sketchDimensions[12].parameter.expression = str(protochkParams["t"]) + " mm"
+            sketchDimensions[13].parameter.expression = str(protochkParams["R"]*2) + " mm"
+        if ("2 -" in gostType):
+            sketchDimensions[14].parameter.expression = str(protochkParams["b0"]) + " mm"
+
+    elif(gostType=="452000" or gostType=="1 - 452000k" or gostType=="2 - 452000k"):
         CylCount = round((d+D)*math.pi/((D-d)/5)/4)
         # Вносим новые параметры
         sketchDimensions[3].parameter.expression = str(D) + " mm"
@@ -100,6 +128,12 @@ def run(occurence, Info):
         sketchDimensions[16].parameter.expression = str(B/9 - 0.5) + " mm"
         sketchDimensions[18].parameter.expression = str(B/9 - 0.5) + " mm"
         sketchDimensions[21].parameter.expression = str(B/9 - 0.5) + " mm"
+
+        if ("1 -" in gostType):
+            sketchDimensions[22].parameter.expression = str(protochkParams["t"]) + " mm"
+            sketchDimensions[23].parameter.expression = str(protochkParams["R"]*2) + " mm"
+        if ("2 -" in gostType):
+            sketchDimensions[24].parameter.expression = str(protochkParams["b0"]) + " mm"
         
     # Изменяем количество цилиндров
     patternFeature.quantity.expression = str(CylCount)
@@ -107,7 +141,11 @@ def run(occurence, Info):
     # Правим скругления
     filletFeature.edgeSets[0].radius.expression = str(r) + " mm"
 
-    if(gostType!="452000"):
+    if ("k" in gostType):
+        # Изменяем отверстие для смазки
+        holeFeature.holeDiameter.expression = str(protochkParams["d0"]) + "mm"
+
+    if(gostType!="452000" and gostType!="1 - 452000k" and gostType!="2 - 452000k"):
         # Получаем combine
         combineFeature = occurence.component.features.combineFeatures[0]
         # Создаем коллекцию объектов
@@ -118,9 +156,9 @@ def run(occurence, Info):
         # Получаем из кругового массива оставшиеся тела качения(ролики)
         for body in patternFeature.bodies:
             toolBodies.add(body)
-        # Устанавливаем таймлайн на до combine
+        # Устанавливаем таймлайн до combine
         combineFeature.timelineObject.rollTo(True)
         # Присваиваем toolBodies для combine
         combineFeature.toolBodies = toolBodies
-        # Возвращаем таймлайн на после combine
+        # Возвращаем таймлайн после combine
         combineFeature.timelineObject.rollTo(False)
