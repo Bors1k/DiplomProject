@@ -20,7 +20,6 @@ export class GOSTElementComponent implements OnInit {
   ngOnInit(): void {
     this.routerLink = "/" + this.gost[this.headers[0]] + "/" + this.gost[this.headers[1]];
     this.pic_url = (this.gost.PIC_URL.split(','))[0]
-    console.log(this.pic_url)
   }
 
 }

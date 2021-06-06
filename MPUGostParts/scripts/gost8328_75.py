@@ -6,10 +6,13 @@ import math
 from .gost22696_2013 import ShortCylSizes
 
 def run(occurence, Info):
+    
     # Переменные
-
     gostType = Info["TYPE"]
     params = Info["PARAMS"].split("/")
+
+    # выборка параметром в зависимости от кол-ва переменных
+    # для подшипников с упорным кольцом, их будет больше
     if len(params) == 5:
         d = float(params[0])
         D = float(params[1])
@@ -41,7 +44,6 @@ def run(occurence, Info):
         BID1 = round((D+d)*0.5 - (BAD1 - (D+d)*0.5) * 2 / 3, 2)
         KID1 = round(d + 0.3 * (D-d), 2)
 
-        # посмотреть как вычисляется кол-во цилиндров
         CylCount = round(math.pi * (KID1 + 0.5*(KAD1-KID1)) / ((KAD1-KID1)/2)/2)
 
     elif(gostType == "32000"):
@@ -91,7 +93,6 @@ def run(occurence, Info):
 
     if(gostType == "2000"):
         # Вносим новые параметры
-
         sketchDimensions[0].parameter.expression = str(B) + " mm"
         sketchDimensions[1].parameter.expression = str(d) + " mm"
         sketchDimensions[2].parameter.expression = str(ADA) + " mm"
@@ -101,7 +102,7 @@ def run(occurence, Info):
         sketchDimensions[8].parameter.expression = str(D) + " mm"
 
     elif(gostType == "12000"):
-
+        # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(d) + " mm"
         sketchDimensions[1].parameter.expression = str(B) + " mm"
         sketchDimensions[3].parameter.expression = str(D) + " mm"
@@ -112,7 +113,7 @@ def run(occurence, Info):
         sketchDimensions[8].parameter.expression = str(KAD1) + " mm"
 
     elif(gostType == "32000"):
-
+        # Вносим новые параметры
         sketchDimensions[1].parameter.expression = str(B) + " mm"
         sketchDimensions[2].parameter.expression = str(d) + " mm"
         sketchDimensions[3].parameter.expression = str(KID1) + " mm"
@@ -122,7 +123,7 @@ def run(occurence, Info):
         sketchDimensions[7].parameter.expression = str(BAD1) + " mm"
 
     elif(gostType == "42000"):
-
+        # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(d) + " mm"
         sketchDimensions[2].parameter.expression = str(B) + " mm"
         sketchDimensions[3].parameter.expression = str(ADA) + " mm"
@@ -133,7 +134,7 @@ def run(occurence, Info):
         sketchDimensions[8].parameter.expression = str(KID1) + " mm"
 
     elif(gostType == "92000"):
-
+        # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(d) + " mm"
         sketchDimensions[1].parameter.expression = str(B) + " mm"
         sketchDimensions[2].parameter.expression = str(ADA) + " mm"

@@ -46,7 +46,7 @@ def run(context):
         # filletFeatures = occurence.component.features.filletFeatures
         filletFeatures = component.features.filletFeatures
         revolveFeatures = component.features.revolveFeatures
-        holeFeature = component.features.holeFeatures[0]
+        # holeFeature = component.features.holeFeatures[0]
         # combineFeatures.targetBody
         i = 0
         # extrudeFeatures = component.features.extrudeFeatures
@@ -96,19 +96,24 @@ def run(context):
         # filletFeatures[0].edgeSets[0].radius.expression = str(r) + " mm"
         # # filletFeatures[1].edgeSets[0].radius.expression = str(r1) + " mm"
 
-        # combineFeature = component.features.combineFeatures[0]
-
         # toolBodies = adsk.core.ObjectCollection.create()
         # for body in revolveFeatures[1].bodies:
         #     toolBodies.add(body)
         # for body in patternFeature.bodies:
         #     toolBodies.add(body)
-        
+
+        # targetBody = revolveFeatures[2].bodies[0]
+
+        # combineFeatures = component.features.combineFeatures
+        # combineInput = combineFeatures.createInput(targetBody,toolBodies)
+        # combineInput.isKeepToolBodies = True
+        # combineInput.operation = 1
+
+        # combineFeature = combineFeatures.add(combineInput)
         # combineFeature.timelineObject.rollTo(True)
         # combineFeature.toolBodies = toolBodies
         # combineFeature.timelineObject.rollTo(False)
 
-        u = 0
     except:
         if ui:
             ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))

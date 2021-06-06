@@ -14,7 +14,7 @@ def run(occurence, Info):
     B = float(params[2])
     r = float(params[3])
 
-    if("K" in gostType):
+    if("k" in gostType):
         protochkParams = gost7634_75K.run(d,gostType)
 
     _d = B/12 + d #Диаметр для построения конусности
@@ -27,8 +27,8 @@ def run(occurence, Info):
     sketchDimensions = sketches.sketchDimensions
     # Получаем скругление
     filletFeature = occurence.component.features.filletFeatures[0]
-    # получаем вращение
-    revolveFeature = occurence.component.features.revolveFeatures[1]
+    # получаем вращения
+    revolveFeatures = occurence.component.features.revolveFeatures
     # получаем отверстие
     if("k" in gostType):
         holeFeature = occurence.component.features.holeFeatures[0]
@@ -146,19 +146,25 @@ def run(occurence, Info):
         holeFeature.holeDiameter.expression = str(protochkParams["d0"]) + "mm"
 
     if(gostType!="452000" and gostType!="1 - 452000k" and gostType!="2 - 452000k"):
-        # Получаем combine
-        combineFeature = occurence.component.features.combineFeatures[0]
         # Создаем коллекцию объектов
         toolBodies = adsk.core.ObjectCollection.create()
         # Получаем из вращения 2 базовых тела качения(ролика)
-        for body in revolveFeature.bodies:
+        for body in revolveFeatures[1].bodies:
             toolBodies.add(body)
         # Получаем из кругового массива оставшиеся тела качения(ролики)
         for body in patternFeature.bodies:
             toolBodies.add(body)
-        # Устанавливаем таймлайн до combine
-        combineFeature.timelineObject.rollTo(True)
-        # Присваиваем toolBodies для combine
-        combineFeature.toolBodies = toolBodies
-        # Возвращаем таймлайн после combine
-        combineFeature.timelineObject.rollTo(False)
+
+        # Получаем targetBody
+        targetBody = revolveFeatures[2].bodies[0]
+
+        # Получаем combineFeatures для компонента
+        combineFeatures = occurence.component.features.combineFeatures
+        # Создаем combineInput для создания комбайна
+        combineInput = combineFeatures.createInput(targetBody,toolBodies)
+        # Сохранить toolsBodies после операции
+        combineInput.isKeepToolBodies = True
+        # Установка типа операции cut
+        combineInput.operation = 1
+        # Добавляем комбинирование
+        combineFeature = combineFeatures.add(combineInput)

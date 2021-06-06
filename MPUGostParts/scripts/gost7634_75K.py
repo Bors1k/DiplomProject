@@ -1,7 +1,7 @@
+# Вспомогательная функция для создания проточек и отверстия для смазки
 def run(d,gosttype):
     params = {}
-    if(gosttype=="1 - 18200k" or gosttype=="1 - 282000k" or gosttype=="1 - 45200k" 
-    or gosttype=="2 - 18200k" or gosttype=="2 - 282000k" or gosttype=="2 - 45200k"):
+    if(gosttype=="1 - 182000k" or gosttype=="1 - 282000k" or gosttype=="1 - 452000k" or gosttype=="2 - 182000k" or gosttype=="2 - 282000k" or gosttype=="2 - 452000k"):
         if(d<65):
             params = {'d0':2,"R":4,"t":0.8,"b0":4.5}
         elif(d>=65 and d<=120):
@@ -17,7 +17,7 @@ def run(d,gosttype):
         elif(d>=420 and d<=500):
             params = {'d0':12.7,"R":24,"t":4.8,"b0":23.5}
 
-    elif(gosttype=="1 - 16200k" or gosttype=="1 - 26200k" or gosttype=="2 - 16200k" or gosttype=="2 - 26200k"):
+    elif(gosttype=="1 - 162000k" or gosttype=="1 - 262000k" or gosttype=="2 - 162000k" or gosttype=="2 - 262000k"):
         if(d>=100 and d<=170):
             params = {'d0':3.2,"R":6.4,"t":1.2,"b0":6.4}
         elif(d>=170 and d<=190):

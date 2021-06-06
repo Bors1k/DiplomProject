@@ -34,7 +34,7 @@ export class GostSizePageComponent implements OnInit {
     this.rout.paramMap.subscribe(params => {
       this.GOST = params.get("GOST");
       this.TYPE = params.get("TYPE");
-      console.log(this.TYPE)
+      // console.log(this.TYPE)
     })
     this.GostRow = {
       ID: 1,
@@ -77,7 +77,7 @@ export class GostSizePageComponent implements OnInit {
   }
 
   insertFile(GostSizes: any) {
-      console.log(GostSizes)
+      // console.log(GostSizes)
       var properties = {
         "PartNumber": "",
         "PartName": this.GOST + " " + GostSizes.NUMBER,
@@ -86,17 +86,12 @@ export class GostSizePageComponent implements OnInit {
         "GOST": this.GOST,
         "TYPE": this.TYPE
       }
-      console.log(properties)
+      // console.log(properties)
       this.model_url
       var NavigationUrl = "fusion360://host/?command=insert&file=" + encodeURIComponent(this.ModelsBaseLink + this.model_url) +
       "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
       "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
       "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true";
-      
-      // var NavigationUrl = "fusion360://command=insert&file=" + encodeURIComponent(this.BaseLink) +
-      // "&properties=" + encodeURIComponent(JSON.stringify(properties)) +
-      // "&privateInfo=" + encodeURIComponent(this.setPrivateInfo(GostSizes)) +
-      // "&id=" + encodeURIComponent(this.GOST + " " + GostSizes.NUMBER) + "&NoFit=true&NoMove=true";
 
       window.location.assign(NavigationUrl)
     }
@@ -111,7 +106,6 @@ export class GostSizePageComponent implements OnInit {
           }
         }
       }
-      console.log(str.slice(0,-1));
       return str.slice(0,-1);
     }
 }
