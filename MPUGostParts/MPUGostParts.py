@@ -5,13 +5,14 @@ import adsk.core
 from urllib.parse import urlparse
 from .utils import addHandler, handleError, clearHandlers, ui
 import traceback, re
-from .scripts import gost8328_75,gost7634_75
+from .scripts import gost8328_75,gost7634_75,gost23526_79
 
 # необходимо все еще править
 COMMANDID = 'MPUGostParts_insert'
 COMMANDNAME = 'Insert MPUGostParts Supplier Components'
 COMMANDDESCRIPTION = 'With MPUGostParts, boost your design productivity and access millions of GOST models from hundreds of supplier catalogs.'
-URL = 'http://localhost:4200/'
+# URL = 'http://localhost:4200/'
+URL = 'https://fusion-gost-library.web.app/'
 PALETTEID = 'MPUGostParts_browser'
 PALETTENAME = 'Autodesk Fusion 360 GOST Library - powered by MPU'
 DOCKINGSTATE = adsk.core.PaletteDockingStates.PaletteDockStateRight
@@ -59,6 +60,8 @@ class InsertedFromURLEventHandler(adsk.core.WebRequestEventHandler):
                         gost8328_75.run(occurence,Info)
                     elif(Info["GOST"]=="7634-75"):
                         gost7634_75.run(occurence,Info)
+                    elif(Info["GOST"]=="23526-79"):
+                        gost23526_79.run(occurence,Info)
         except:
             if ui:
                 ui.messageBox('Failed:\n{}'.format(traceback.format_exc()))

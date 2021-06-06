@@ -1,7 +1,7 @@
 const mysql = require("mysql2");
 const express = require("express");
 // const dbConfig = require("./app/config/db.config")
-const dbConfig = require("./app/config/deploy.db.config")
+const dbConfig = require("./app/config/local.db.config")
 
 const app = express();
 
@@ -80,7 +80,7 @@ app.get("/GOSTS/:GOST/:TYPE/SIZES", function (req, res) {
         res.json(data);
     });
 });
-PORT = process.env.PORT || 3000
-app.listen(PORT, function () {
+
+app.listen(3000, function () {
     console.log("Сервер ожидает подключения...");
 });

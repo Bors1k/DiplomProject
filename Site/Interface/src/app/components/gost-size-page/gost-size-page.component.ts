@@ -21,7 +21,8 @@ export class GostSizePageComponent implements OnInit {
   SizeHeaderDescriptions: any;
 
   private APP_UID = "3854bc50-bbcc-11eb-8529-0242ac130003"
-  private ModelsBaseLink = "http://localhost:4200/assets/models/"
+  // private ModelsBaseLink = "http://localhost:4200/assets/models/"
+  private ModelsBaseLink = "https://fusion-gost-library.web.app/assets/models/"
 
   GOST: any;
   TYPE: any;

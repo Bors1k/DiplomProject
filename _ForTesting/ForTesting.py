@@ -13,17 +13,17 @@ def run(context):
     ui = None
     try:
         # Переменные
-        params = {"d": 170, "D": 260, "B": 160, "r": 3.5}
+        params = {"d": 15, "D": 28, "H": 9, "D1": 28,"d1": 16,"r":0.5}
         d = params["d"]
         D = params["D"]
-        B = params["B"]
+        H = params["H"]
+        D1 = params["D1"]
+        d1 = params["d1"]
         r = params["r"]
-
-        _d = B/12 + d
 
         protochkParams = gost7634_75K.run(d,"16200")
 
-        CylCount = round((d+D)*math.pi/((D-d)/5)/4)
+        CylCount = round(9*d/H)
 
         # Стандартные получалки
         app = adsk.core.Application.get()
@@ -40,8 +40,9 @@ def run(context):
         patternFeature = component.features.circularPatternFeatures[0]
         # Получаем скетч и его размеры
         # sketches = occurence.component.sketches[0]
-        sketches = component.sketches[0]
-        sketchDimensions = sketches.sketchDimensions
+        sketches = component.sketches
+        sketchDimensions = sketches[0].sketchDimensions
+        sketchDimensions2 = sketches[1].sketchDimensions
         # Получаем коллекцию скруглений
         # filletFeatures = occurence.component.features.filletFeatures
         filletFeatures = component.features.filletFeatures
@@ -51,29 +52,38 @@ def run(context):
         i = 0
         # extrudeFeatures = component.features.extrudeFeatures
         _params = {"d": 100, "D": 140, "B": 40, "r": 2}
-
+    
         boolean = True
         i = 0
         num = -1
         while(boolean):
             num = -1
-            for dim in sketchDimensions:
+            for dim in sketchDimensions2:
                 _dim = dim.parameter.expression
                 num = num + 1
             i = i+1
             if (i == 5):
                 boolean = False
 
+        component.constructionPlanes[0].definition.angle.expression = str(360/(round(9*d/H)*2)) + "deg"
+
         # Вносим новые параметры
-        # sketchDimensions[0].parameter.expression = str(D) + " mm"
-        # sketchDimensions[1].parameter.expression = str(d) + " mm"
-        # sketchDimensions[2].parameter.expression = str(B/7) + " mm"
-        # sketchDimensions[3].parameter.expression = str(B*2/7) + " mm"
-        # sketchDimensions[4].parameter.expression = str(B) + " mm"
-        # sketchDimensions[5].parameter.expression = str((D-d)/4) + " mm"
-        # sketchDimensions[6].parameter.expression = str(B*2/7) + " mm"
-        # sketchDimensions[7].parameter.expression = str((D-d)/16) + " mm"
-        # sketchDimensions[8].parameter.expression = str(_d) + " mm"
+        # sketchDimensions[0].parameter.expression = str(H) + " mm"
+        # sketchDimensions[1].parameter.expression = str(d1) + " mm"
+        # sketchDimensions[2].parameter.expression = str(d) + " mm"
+        # sketchDimensions[3].parameter.expression = str(D1) + " mm"
+        # sketchDimensions[4].parameter.expression = str(D) + " mm"
+        # sketchDimensions[5].parameter.expression = str(H/5) + " mm"
+        # sketchDimensions[6].parameter.expression = str((D-d1)/2.5) + " mm"
+        # sketchDimensions[7].parameter.expression = str(H/3) + " mm"
+        # sketchDimensions[8].parameter.expression = str(D-d1)/60) + " mm"
+        # sketchDimensions[9].parameter.expression = str(D-d1)/6) + " mm"
+
+        # sketchDimensions2[0].parameter.expression = str(D/12+5*d1/12) + " mm"
+        # sketchDimensions2[1].parameter.expression = str(3*(D-d1)/20) + " mm"
+        # sketchDimensions2[2].parameter.expression = str(H/3) + " mm"
+
+
         # sketchDimensions[11].parameter.expression = str((D-d)/8) + " mm"
         # sketchDimensions[12].parameter.expression = str((D-d)/8) + " mm"
 
