@@ -1,4 +1,4 @@
-    <div class="card mb-3" style="max-width: 400px;" *ngIf="gost.MODEL_URL!='none'" id="gostElement">
+    <div class="card mb-3" style="max-width: 400px; cursor: pointer;" *ngIf="gost.MODEL_URL!='none'" id="gostElement" routerLink="{{routerLink}}">
     <div class="row g-0">
       <div class="col-md-4">
         <img src="{{pic_url}}" class="card-img mx-auto d-block">
@@ -8,7 +8,7 @@
             <h6 class="card-title">ГОСТ {{gost[headers[0]]}}</h6>
             <p class="card-text">{{gost[headers[2]]}}</p>
             <p class="card-text"><b>Тип {{gost[headers[1]]}}</b></p>
-            <a routerLink="{{routerLink}}" routerLinkActive="active" class="card-link">Далее</a>
+            <!-- <a routerLink="{{routerLink}}" routerLinkActive="active" class="card-link">Далее</a> -->
         </div>
       </div>
     </div>

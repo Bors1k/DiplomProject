@@ -4,7 +4,7 @@
             (ngModelChange)="changeSearchStr()" #searchInput>
     </div>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-4" style="border-right: 1px lightgray solid; min-height: 100vh;">
             <app-tree-view-comp (selectCategoryEvent)="changeSelectedCategory($event)"></app-tree-view-comp>
         </div>
         <div class="col">
