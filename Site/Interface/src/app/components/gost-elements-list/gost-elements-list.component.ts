@@ -35,6 +35,11 @@ export class GostElementsListComponent implements OnInit {
     try{
       let gosts = this.gostsService.getAllGosts()
       this.gosts = await gosts;
+      this.gosts = this.gosts.filter((gost)=>{
+          if(gost.MODEL_URL != "none"){
+            return gost
+          }
+      })
     }
     catch(err){
       console.error(err);
