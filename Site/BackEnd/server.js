@@ -47,7 +47,9 @@ app.get("/GOSTS/:GOST", function (req, res, next) {
 
 app.get("/HEADERS/:ID", function (req, res, next) {
     const ID = req.params.ID;
-    var queryStr = "SELECT headers FROM `pageSizeHeaders` WHERE gostTypesId = ?";
+    var queryStr = "SELECT headers FROM `pageSizeHeaders`"+
+    "LEFT JOIN `gost_types` ON `gost_types`.`PAGE_SIZE_HEADER_ID` = `pagesizeheaders`.`idpageSizeHeaders` WHERE `gost_types`.`ID` = ?"
+    
     pool.query(queryStr, ID, function (err, data) {
         if (err) return console.log(err);
         console.log(data);
