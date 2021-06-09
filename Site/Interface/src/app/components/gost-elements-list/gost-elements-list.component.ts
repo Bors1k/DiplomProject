@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GostsService } from 'src/app/services/gosts.service';
 import { IGostRow } from '../../interfaces/GOST';
+import { PartsNode } from 'src/app/interfaces/PartsNode';
 
 @Component({
   selector: 'app-gost-elements-list',
@@ -10,7 +11,7 @@ import { IGostRow } from '../../interfaces/GOST';
 export class GostElementsListComponent implements OnInit {
 
   searchStr: string;
-  selectedCategory: number;
+  selectedCategory: PartsNode;
   gosts: IGostRow[];
   gost: IGostRow;
 
@@ -23,8 +24,8 @@ export class GostElementsListComponent implements OnInit {
     this.searchStr = this.searchInput.nativeElement.value;
   }
 
-  changeSelectedCategory(id: number){
-    this.selectedCategory = id;
+  changeSelectedCategory(object: PartsNode){
+    this.selectedCategory = object;
   }
 
   async ngOnInit(){

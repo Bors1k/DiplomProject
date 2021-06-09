@@ -18,14 +18,14 @@ export class GostsService extends BaseApiService {
     return this.get('/GOSTS', this.options).toPromise();
   }
 
-  getGostSizes(gost: string, type: string){
-    return this.get(`/GOSTS/${gost}/${type}/SIZES`,this.options).toPromise();
+  getGostSizes(gost: string, type: string) {
+    return this.get(`/GOSTS/${gost}/${type}/SIZES`, this.options).toPromise();
   }
 
-  getGostRow(gost: string, type: string){
-    return this.get(`/GOSTS/${gost}/${type}`,this.options).toPromise();
+  getGostRow(gost: string, type: string) {
+    return this.get(`/GOSTS/${gost}/${type}`, this.options).toPromise();
   }
-  getSizeHeaders(id: number){
-    return this.get(`/HEADERS/${id}`,this.options).toPromise();
+  getSizeHeaders(id: number) {
+    return this.get(`/HEADERS/${id}`, this.options).toPromise();
   }
 }

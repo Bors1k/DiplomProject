@@ -10,7 +10,7 @@
         <div class="col">
             <div class="row justify-content-center">
 
-            <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: selectedCategory; let i = index"
+            <app-gost-element *ngFor="let gost of gosts  | searchFilter: searchStr: selectedCategory"
                     [gost]="gost" style="width: auto; height: auto;" id="gost-element"></app-gost-element>
             </div>
         </div>

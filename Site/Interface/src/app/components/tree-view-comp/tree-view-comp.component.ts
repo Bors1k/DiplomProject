@@ -2,14 +2,7 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { TreeviewService } from 'src/app/services/treeview.service';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
-
-interface PartsNode {
-  idTreeViewTable: any;
-  name: string;
-  parent: any;
-  children?: PartsNode[];
-  childrensId?: number[];
-}
+import { PartsNode } from 'src/app/interfaces/PartsNode';
 
 @Component({
   selector: 'app-tree-view-comp',
@@ -17,33 +10,33 @@ interface PartsNode {
   styleUrls: ['./tree-view-comp.component.css']
 })
 
-export class TreeViewCompComponent {
+export class TreeViewCompComponent implements OnInit {
 
-  @Output() selectCategoryEvent = new EventEmitter<number>();
+  @Output() selectCategoryEvent = new EventEmitter<PartsNode>();
 
 
   treeControl = new NestedTreeControl<PartsNode>(node => node.children)
   treeViewData = new MatTreeNestedDataSource<PartsNode>();
 
   constructor(private treeViewService: TreeviewService) { 
-    this.OnInit()
   }
 
-  selectCategory(id: number){
-    this.selectCategoryEvent.emit(id);
+  selectCategory(object: PartsNode){
+    this.selectCategoryEvent.emit(object);
   }
 
   collapseAll(){
     this.treeControl.collapseAll()
-    this.selectCategoryEvent.emit(1)
+    this.selectCategoryEvent.emit(null)
   }
   
-  async OnInit() {
+  async ngOnInit() {
     let treeViewData: PartsNode[];
     treeViewData = await this.treeViewService.getTreeView()
 
     treeViewData.forEach(element => {
       element.children = []
+      element.childs!=null ? element.childs = element.childs.split("/"): false
     });
     treeViewData.forEach(firstCicrle => {
       let i = 0;
