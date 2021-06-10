@@ -13,8 +13,6 @@ export class GostElementsListComponent implements OnInit {
   searchStr: string;
   selectedCategory: PartsNode;
   gosts: IGostRow[];
-  gost: IGostRow;
-
 
   @ViewChild('searchInput') searchInput: ElementRef;
   
@@ -29,10 +27,6 @@ export class GostElementsListComponent implements OnInit {
   }
 
   async ngOnInit(){
-    await this.getGosts();
-  }
-
-  async getGosts(){
     try{
       let gosts = this.gostsService.getAllGosts()
       this.gosts = await gosts;

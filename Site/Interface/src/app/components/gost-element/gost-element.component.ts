@@ -11,14 +11,13 @@ export class GOSTElementComponent implements OnInit {
   @Input() gost: IGostRow;
   pic_url: string;
   
-  headers = ["GOST", "TYPE", "INFO"];
   routerLink: string;
   
   constructor() {
   }
 
   ngOnInit(): void {
-    this.routerLink = "/" + this.gost[this.headers[0]] + "/" + this.gost[this.headers[1]];
+    this.routerLink = "/" + this.gost.GOST + "/" + this.gost.TYPE;
     this.pic_url = (this.gost.PIC_URL.split(','))[0]
   }
 

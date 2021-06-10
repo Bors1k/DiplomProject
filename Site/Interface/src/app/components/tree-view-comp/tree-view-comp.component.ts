@@ -13,8 +13,7 @@ import { PartsNode } from 'src/app/interfaces/PartsNode';
 export class TreeViewCompComponent implements OnInit {
 
   @Output() selectCategoryEvent = new EventEmitter<PartsNode>();
-
-
+  
   treeControl = new NestedTreeControl<PartsNode>(node => node.children)
   treeViewData = new MatTreeNestedDataSource<PartsNode>();
 
@@ -31,23 +30,23 @@ export class TreeViewCompComponent implements OnInit {
   }
   
   async ngOnInit() {
-    let treeViewData: PartsNode[];
-    treeViewData = await this.treeViewService.getTreeView()
+    let _treeViewData: PartsNode[];
+    _treeViewData = await this.treeViewService.getTreeView()
 
-    treeViewData.forEach(element => {
+    _treeViewData.forEach(element => {
       element.children = []
       element.childs!=null ? element.childs = element.childs.split("/"): false
     });
-    treeViewData.forEach(firstCicrle => {
+    _treeViewData.forEach(firstCicrle => {
       let i = 0;
-      treeViewData.forEach(secondCicrle => {
+      _treeViewData.forEach(secondCicrle => {
         if (firstCicrle.idTreeViewTable == secondCicrle.parent) {
           firstCicrle.children[i] = secondCicrle
           i++;
         }
       });
     });
-    this.treeViewData.data = [treeViewData[0]]
+    this.treeViewData.data = [_treeViewData[0]]
   }
   hasChild = (_:number, node: PartsNode)=>!!node.children && node.children.length > 0;
 }
