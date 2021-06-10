@@ -17,10 +17,9 @@ def run(occurence, Info):
     d1 = float(params[4])
     r = float(params[5])
 
-    CylCount = round((d+D)*math.pi/((D-d)/4)/4) #Кол-во цилиндров
 
     # Получаем массив
-    patternFeature = occurence.component.features.circularPatternFeatures[0]
+    patternFeatures = occurence.component.features.circularPatternFeatures
     # Получаем скетч и его размеры
     sketches = occurence.component.sketches
     sketchDimensions = sketches[0].sketchDimensions
@@ -29,6 +28,7 @@ def run(occurence, Info):
     filletFeature = occurence.component.features.filletFeatures[0]
 
     if(gostType=="9000"):
+        CylCount = round((d+D)*math.pi/((D-d)/4)/4)
         # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(H) + " mm"
         sketchDimensions[1].parameter.expression = str(d) + " mm"
@@ -40,7 +40,11 @@ def run(occurence, Info):
         sketchDimensions[7].parameter.expression = str((D-d1)/4) + " mm"
         sketchDimensions[8].parameter.expression = str(H/3) + " mm"
 
+        # Изменяем количество цилиндров
+        patternFeatures[0].quantity.expression = str(CylCount)
+
     elif(gostType=="889000"):
+        CylCount = round(9*d/H) #Кол-во цилиндров
         # Вносим новые параметры
         sketchDimensions[0].parameter.expression = str(H) + " mm"
         sketchDimensions[1].parameter.expression = str(d1) + " mm"
@@ -53,14 +57,16 @@ def run(occurence, Info):
         sketchDimensions[8].parameter.expression = str((D-d1)/60) + " mm"
         sketchDimensions[9].parameter.expression = str((D-d1)/6) + " mm"
 
+        occurence.component.constructionPlanes[0].definition.angle.expression = str(360/(CylCount*2)) + "deg"
+
         sketchDimensions1[0].parameter.expression = str(D/12+5*d1/12) + " mm"
         sketchDimensions1[1].parameter.expression = str(3*(D-d1)/20) + " mm"
         sketchDimensions1[2].parameter.expression = str(H/3) + " mm"
 
-        occurence.component.constructionPlanes[0].definition.angle.expression = str(360/(round(9*d/H)*2)) + "deg"
+        # Изменяем количество цилиндров
+        patternFeatures[0].quantity.expression = str(CylCount)
+        patternFeatures[1].quantity.expression = str(CylCount)
 
-    # Изменяем количество цилиндров
-    patternFeature.quantity.expression = str(CylCount)
 
     # Правим скругления
     filletFeature.edgeSets[0].radius.expression = str(r) + " mm"
