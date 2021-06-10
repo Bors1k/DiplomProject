@@ -83,7 +83,7 @@ def createCommand():
     removeCommand()
 
     cmdDef = ui.commandDefinitions.addButtonDefinition(COMMANDID, COMMANDNAME, COMMANDDESCRIPTION, 'resources/insert')
-    # cmdDef.toolClipFilename = 'resources/insert/toolclip.svg'
+    cmdDef.toolClipFilename = 'resources/insert/logo.png'
     addHandler(cmdDef.commandCreated, onCommandCreated)
 
     controls = toolbarPanelControls()
