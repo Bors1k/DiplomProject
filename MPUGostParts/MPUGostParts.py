@@ -108,8 +108,8 @@ def onCommandCreated(args: adsk.core.CommandCreatedEventArgs):
 
 def onExecute(args: adsk.core.CommandEventArgs):
     # display the legal prompt
-    import neu_dev
-    neu_dev.run_text_command('Fusion.ShowLegalNotice MPUGostParts')
+    # import neu_dev
+    # neu_dev.run_text_command('Fusion.ShowLegalNotice MPUGostParts')
 
     createPalette()
 

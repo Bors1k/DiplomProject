@@ -145,26 +145,26 @@ def run(occurence, Info):
         # Изменяем отверстие для смазки
         holeFeature.holeDiameter.expression = str(protochkParams["d0"]) + "mm"
 
-    if(gostType!="452000" and gostType!="1 - 452000k" and gostType!="2 - 452000k"):
-        # Создаем коллекцию объектов
-        toolBodies = adsk.core.ObjectCollection.create()
-        # Получаем из вращения 2 базовых тела качения(ролика)
-        for body in revolveFeatures[1].bodies:
-            toolBodies.add(body)
-        # Получаем из кругового массива оставшиеся тела качения(ролики)
-        for body in patternFeature.bodies:
-            toolBodies.add(body)
+    # if(gostType!="452000" and gostType!="1 - 452000k" and gostType!="2 - 452000k"):
+    #     # Создаем коллекцию объектов
+    #     toolBodies = adsk.core.ObjectCollection.create()
+    #     # Получаем из вращения 2 базовых тела качения(ролика)
+    #     for body in revolveFeatures[1].bodies:
+    #         toolBodies.add(body)
+    #     # Получаем из кругового массива оставшиеся тела качения(ролики)
+    #     for body in patternFeature.bodies:
+    #         toolBodies.add(body)
 
-        # Получаем targetBody
-        targetBody = revolveFeatures[2].bodies[0]
+    #     # Получаем targetBody
+    #     targetBody = revolveFeatures[2].bodies[0]
 
-        # Получаем combineFeatures для компонента
-        combineFeatures = occurence.component.features.combineFeatures
-        # Создаем combineInput для создания комбайна
-        combineInput = combineFeatures.createInput(targetBody,toolBodies)
-        # Сохранить toolsBodies после операции
-        combineInput.isKeepToolBodies = True
-        # Установка типа операции cut
-        combineInput.operation = 1
-        # Добавляем комбинирование
-        combineFeature = combineFeatures.add(combineInput)
+    #     # Получаем combineFeatures для компонента
+    #     combineFeatures = occurence.component.features.combineFeatures
+    #     # Создаем combineInput для создания комбайна
+    #     combineInput = combineFeatures.createInput(targetBody,toolBodies)
+    #     # Сохранить toolsBodies после операции
+    #     combineInput.isKeepToolBodies = True
+    #     # Установка типа операции cut
+    #     combineInput.operation = 1
+    #     # Добавляем комбинирование
+    #     combineFeature = combineFeatures.add(combineInput)
