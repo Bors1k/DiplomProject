@@ -10,29 +10,29 @@ import { PartsNode } from 'src/app/interfaces/PartsNode';
   styleUrls: ['./tree-view-comp.component.css']
 })
 
-export class TreeViewCompComponent implements OnInit {
+export class TreeViewComponent implements OnInit {
 
   @Output() selectCategoryEvent = new EventEmitter<PartsNode>();
   
   treeControl = new NestedTreeControl<PartsNode>(node => node.children)
   treeViewData = new MatTreeNestedDataSource<PartsNode>();
-
+  
   constructor(private treeViewService: TreeviewService) { 
   }
-
+  
   selectCategory(object: PartsNode){
     this.selectCategoryEvent.emit(object);
   }
-
+  
   collapseAll(){
     this.treeControl.collapseAll()
     this.selectCategoryEvent.emit(null)
   }
-  
+
   async ngOnInit() {
     let _treeViewData: PartsNode[];
     _treeViewData = await this.treeViewService.getTreeView()
-
+    
     _treeViewData.forEach(element => {
       element.children = []
       element.childs!=null ? element.childs = element.childs.split("/"): false

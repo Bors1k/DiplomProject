@@ -7,12 +7,14 @@ import { PartsNode } from 'src/app/interfaces/PartsNode';
 export class SearchFilterPipe implements PipeTransform {
 
   transform(gosts: any, searchStr: string, NodePart: PartsNode): any {
-    if ((gosts === undefined || gosts.length == 0 || searchStr == "" || searchStr === undefined) && (NodePart == undefined || NodePart.idTreeViewTable == 1)) {
+    if ((gosts === undefined || gosts.length == 0 || searchStr == "" 
+    || searchStr === undefined) && (NodePart == undefined || NodePart.idTreeViewTable == 1)) {
       return gosts;
     }
     return gosts.filter(gost => {
       if (searchStr == undefined || searchStr == '') {
-        if (NodePart.childs != null && (gost.TREE_VIEW_ID == NodePart.idTreeViewTable || NodePart.childs.includes(gost.TREE_VIEW_ID.toString()))) {
+        if (NodePart.childs != null && (gost.TREE_VIEW_ID == NodePart.idTreeViewTable 
+          || NodePart.childs.includes(gost.TREE_VIEW_ID.toString()))) {
           return true;
         }
       }

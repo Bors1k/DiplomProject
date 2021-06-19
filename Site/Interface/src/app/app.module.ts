@@ -11,7 +11,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { GostElementsListComponent } from './components/gost-elements-list/gost-elements-list.component';
 import { GostSizePageComponent } from './components/gost-size-page/gost-size-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TreeViewCompComponent } from './components/tree-view-comp/tree-view-comp.component';
+import { TreeViewComponent } from './components/tree-view-comp/tree-view-comp.component';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -28,7 +28,7 @@ import { MatButtonModule } from '@angular/material/button'
     NavBarComponent,
     GostElementsListComponent,
     GostSizePageComponent,
-    TreeViewCompComponent
+    TreeViewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 export interface PartsNode {
-  idTreeViewTable: any;
+  idTreeViewTable: number;
   name: string;
-  parent: any;
+  parent: number;
   children?: PartsNode[];
   childs?: any;
 }
