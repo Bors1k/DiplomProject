@@ -1,4 +1,3 @@
-
 import adsk.core # pylint: disable=import-error
 import sys, traceback
 from typing import Callable

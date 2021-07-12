@@ -1,6 +1,3 @@
-#Author-MPU
-#Description-
-
 import adsk.core 
 from urllib.parse import urlparse
 from .utils import addHandler, handleError, clearHandlers, ui
@@ -11,7 +8,6 @@ from .scripts import gost8328_75,gost7634_75,gost23526_79
 COMMANDID = 'MPUGostParts_insert'
 COMMANDNAME = 'Insert MPUGostParts Supplier Components'
 COMMANDDESCRIPTION = 'With MPUGostParts, boost your design productivity and access millions of GOST models from hundreds of supplier catalogs.'
-# URL = 'http://localhost:4200/'
 URL = 'https://fusion-gost-library.web.app/'
 PALETTEID = 'MPUGostParts_browser'
 PALETTENAME = 'Autodesk Fusion 360 GOST Library - powered by MPU'
@@ -107,10 +103,6 @@ def onCommandCreated(args: adsk.core.CommandCreatedEventArgs):
     addHandler(args.command.execute, onExecute)
 
 def onExecute(args: adsk.core.CommandEventArgs):
-    # display the legal prompt
-    # import neu_dev
-    # neu_dev.run_text_command('Fusion.ShowLegalNotice MPUGostParts')
-
     createPalette()
 
 def createPalette():

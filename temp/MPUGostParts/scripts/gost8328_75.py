@@ -77,12 +77,6 @@ def run(occurence, Info):
         CylCount = round((math.pi * (D+d) / 2) /
                          ((D - (KID1 - d) - KID1) / 2) / 2)
 
-    # Стандартные получалки
-    app = adsk.core.Application.get()
-    design = app.activeProduct
-    components = design.allComponents
-    # rootComp = design.rootComponent
-
     # Получаем массив
     patternFeature = occurence.component.features.circularPatternFeatures[0]
     # Получаем скетч и его размеры

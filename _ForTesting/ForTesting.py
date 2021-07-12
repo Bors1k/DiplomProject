@@ -42,7 +42,7 @@ def run(context):
         # sketches = occurence.component.sketches[0]
         sketches = component.sketches
         sketchDimensions = sketches[0].sketchDimensions
-        sketchDimensions2 = sketches[1].sketchDimensions
+        # sketchDimensions2 = sketches[1].sketchDimensions
         # Получаем коллекцию скруглений
         # filletFeatures = occurence.component.features.filletFeatures
         filletFeatures = component.features.filletFeatures
@@ -52,20 +52,26 @@ def run(context):
         i = 0
         # extrudeFeatures = component.features.extrudeFeatures
         _params = {"d": 100, "D": 140, "B": 40, "r": 2}
-    
+
+        app = adsk.core.Application.get()
+        ui = app.userInterface
+        design = app.activeProduct
+        rootComp = design.rootComponent
+
+        component = rootComp
+        sketches = component.sketches
+        sketchDimensions = sketches[0].sketchDimensions
+
         boolean = True
         i = 0
         num = -1
-        while(boolean):
-            num = -1
-            for dim in sketchDimensions2:
-                _dim = dim.parameter.expression
-                num = num + 1
-            i = i+1
-            if (i == 5):
-                boolean = False
+        for dim in sketchDimensions:
+            _dim = dim.parameter.expression
+            num = num + 1
+            print("Размер:" + str(_dim) + " | ID: "+ str(num))
 
-        component.constructionPlanes[0].definition.angle.expression = str(360/(round(9*d/H)*2)) + "deg"
+
+        # component.constructionPlanes[0].definition.angle.expression = str(360/(round(9*d/H)*2)) + "deg"
 
         # Вносим новые параметры
         # sketchDimensions[0].parameter.expression = str(H) + " mm"
